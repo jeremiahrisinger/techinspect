@@ -1,0 +1,115 @@
+h1 {
+    color: black;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    text-align: center;
+    background-color: rgb(221, 221, 221);
+    margin: 0%;
+    height: 100px;
+}
+body {
+    background-color: rgb(158, 158, 158);
+    margin: 0%;
+}
+
+h2 {
+    color: black;
+    background-color: rgb(221, 221, 221);
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    text-align: center;
+    margin: 0%;
+}
+
+form {
+    background-color: white;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 20px;
+    text-align: center;
+    margin: 0%;
+}
+div {
+    border: 1%;
+    border-color: rgb(221, 221, 221);
+    border-style: solid;
+    border-radius: 3px;
+    margin: 2.5%;
+    background-color: white;
+}
+
+div .level2{
+    border: 1%;
+    border-color:#727272;
+    border-style: solid;
+    border-radius: 5px;
+    margin: 2.5%;
+    background-color:#919191;
+}
+div .level2 h3 {
+    color: white;
+    background-color: #727272;
+
+
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    text-align: center;
+    margin: 0%;
+}
+
+p {
+    margin: 30px;
+    text-align:justify;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+.title {
+    text-align: center;
+    font-size: 20px;
+}
+.left {
+    margin-right: 110px;
+}
+.right {
+    background-color: #f1f1f1;
+    margin-top: 100px;
+    margin-right: 0%;
+    height: 100%;
+    width: 100px;
+    right: 0;
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+label, input {
+    height: 30px;
+    min-width: 120px;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    margin-left: 10%;
+    margin-right: 10%;
+    text-align: left;
+}
+ul {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 16px;
+    list-style-type: none;
+    height: 70%;
+    background-color: #727272;
+}
+
+li a {
+    display: block;
+    color: #000;
+    padding: 8px;
+    text-decoration: none;
+    background-color: #f1f1f1;
+}
+
+li a.active {
+    background-color: #727272;
+    color: white;
+}
+
+li a:hover:not(.active) {
+    background-color: #555;
+    color: white;
+}
