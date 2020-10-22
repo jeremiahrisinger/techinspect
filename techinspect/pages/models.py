@@ -1,7 +1,8 @@
+from pages import db_validators as dbv
 from django.db import models 
 
 from django.db.models import *
-  
+
 
 # Create your models here. 
 class Image(models.Model):
@@ -9,20 +10,19 @@ class Image(models.Model):
 
 class User(models.Model): 
     UUID = models.CharField(max_length=34, primary_key=True)
+    enc_pswd = models.CharField(max_length=12, default="")
     firstName = models.CharField(max_length=30) 
     middleInitial = models.CharField(max_length=1) 
     lastName = models.CharField(max_length=50) 
-    VIN = models.ForeignKey('Vehicle', on_delete=models.CASCADE, null=False) #Have to link by name of class since it is created later on in file
-    waiverID = models.ForeignKey('Waiver', on_delete=models.CASCADE, null=False) #same here
-    imageID = models.ForeignKey('Image', on_delete=models.CASCADE, null=False) #and here
-    def login(self, email, enc_pswd):
-        #try:
-        #    user = User.objects.filter(pk=email)
-        pass
+    VIN = models.ForeignKey('Vehicle', on_delete=models.CASCADE, null=True) #Have to link by name of class since it is created later on in file
+    waiverID = models.ForeignKey('Waiver', on_delete=models.CASCADE, null=True) #same here
+    imageID = models.ForeignKey('Image', on_delete=models.CASCADE, null=True) #and here
+
+
 
 class Vehicle(models.Model): 
     VIN = models.CharField(max_length=17, primary_key=True) 
-    vehicleYear = models.IntegerField() #TODO: include a validator here for ensuring the age of the car isn't malformed.
+    vehicleYear = models.IntegerField(validators=[dbv.validate_car_year])
     vehicleMake = models.CharField(max_length=50) 
     vehicleModel = models.CharField(max_length=50) 
     inspectionID = models.ForeignKey('Inspection', on_delete=models.CASCADE, null=False) #deleting a car deletes its inspection 
