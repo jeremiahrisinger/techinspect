@@ -9,12 +9,10 @@
         <h1>CHAMPAIGN COUNTY SPORTS CAR CLUB</h1>
             <div>
                 <h2>Welcome please sign in!</h2>
-                <form action="../home">
-                    <label for="username">Username:</label>
-                    <input type="text" id="username" name="username"><br><br>
-                    <label for="password">Password:</label>
-                    <input type="password" id="password" name="password"><br><br>
-                    <input type="submit" value="Submit" formaction="../home" style="text-align: center;">
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    {{ form }}
+                    <input type="submit" value="Submit" style="text-align: center;">
                 </form>
             </div>   
             <h1 style="background-color: white;">
