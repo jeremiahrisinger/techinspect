@@ -1,8 +1,12 @@
+from django.core.exceptions import ObjectDoesNotExist
+
 from pages.models import *
 
 def login(email, pswd):
-    if(user := TIUser.objects.get(username=email)):
+    try:
+        user = TIUser.objects.get(username=email)
+    except ObjectDoesNotExist:
+        return False
+    else:
         if user.check_password(pswd):
             return True
-        else:
-            return False

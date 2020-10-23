@@ -1,3 +1,14 @@
+.error{
+    border: 1px solid;
+    margin: 10px auto;
+    padding: 15px 10px 15px 50px;
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    max-width: 460px;
+    color: #D8000C;
+    background-color: #FFBABA;
+}
+
 h1 {
     color: black;
     font-family:Verdana, Geneva, Tahoma, sans-serif;
@@ -51,3 +62,4 @@ label, input {
     margin-right: 10%;
     text-align: left;
 }
+

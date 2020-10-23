@@ -1,5 +1,5 @@
 from django.http import HttpResponse, Http404, HttpResponseRedirect
-
+from django.contrib import messages
 from django.shortcuts import render
 
 from pages import forms
@@ -11,8 +11,9 @@ def login_render(request):
         if form.is_valid():
             #IMPORTANT: TO ACCESS FORM DATA ALWAYS USE cleaned_data['name of field']
             if utils.login(form.cleaned_data['username'], form.cleaned_data['password']):
-                print("Getting here!!!")
                 return HttpResponseRedirect('home/') 
+            else:
+                messages.error(request, "Login failed due to incorrect username/password")
     else:
         form = forms.LoginForm()
     return render(request, 'login/index.html', {'form': form})
