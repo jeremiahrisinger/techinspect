@@ -121,3 +121,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 STATIC_URL = '/static/'
+
+#Set the auth model to be our TIUser class defined in pages/models.py
+AUTH_USER_MODEL = "pages.TIUser"

@@ -5,9 +5,10 @@ from datetime import datetime #For validate_car_year
 
 
 def validate_car_year(value):
-    if value > datetime.year + 1:
+    if value > datetime.now().year + 1:
         raise ValidationError(
         _('The year value %(value) cannot be more than %(acceptable_year)'),
-        params={'value': value, 'acceptable_year': datetime.year + 1},
+        params={'value': value, 'acceptable_year': datetime.now().year + 1},
+
         )
 
