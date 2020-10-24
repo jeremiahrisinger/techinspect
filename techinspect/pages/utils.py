@@ -6,7 +6,8 @@ def login(email, pswd):
     try:
         user = TIUser.objects.get(username=email)
     except ObjectDoesNotExist:
-        return False
+        raise ObjectDoesNotExist
     else:
         if user.check_password(pswd):
             return True
+    return False
