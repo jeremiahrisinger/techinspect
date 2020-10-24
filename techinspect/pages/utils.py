@@ -11,3 +11,6 @@ def login(email, pswd):
         if user.check_password(pswd):
             return True
     return False
+
+def add_user(email, password, image):
+    return True

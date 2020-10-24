@@ -27,7 +27,8 @@ class Vehicle(models.Model):
 
 
 class Inspection(models.Model): 
-    inspectionID = models.CharField(max_length=34, primary_key=True) 
+    #TODO: Is defining an ID here necessary or should we just use the one provided by Django?
+    inspectionID = models.AutoField(primary_key=True) 
     inspectionDate = models.CharField(max_length=30) 
     exteriorInspection = models.CharField(max_length=100) 
     interiorInspection = models.CharField(max_length=100) 
@@ -42,13 +43,26 @@ class Inspection(models.Model):
     VIN = models.ForeignKey(Vehicle, on_delete=DO_NOTHING) #Shouldn't delete a car when the inspection is deleted
 
 class Waiver(models.Model): 
-    waiverID = models.CharField(max_length=34, primary_key=True) 
+    #TODO: Is defining an ID here necessary or should we just use the one provided by Django?
+    waiverID = models.AutoField(primary_key=True) 
     waiverDate = models.CharField(max_length=30) 
     waiverComplete = models.CharField(max_length=100) 
     UUID = models.ForeignKey(TIUser, on_delete=DO_NOTHING) 
 
 class Image(models.Model):
-    imageID = models.CharField(max_length=34, primary_key=True)
+    #TODO: Is defining an ID here necessary or should we just use the one provided by Django?
+    imageID = models.AutoField(primary_key=True) 
     waiverID = models.ForeignKey(Waiver, on_delete=models.CASCADE, null=True) #Deleting an inspection deletes the photo, 
                                                                               #because we include and imageID in TIUser we can't force a waiver FK
-    #TODO Have to figure out how to store image payload
+    image = models.ImageField(upload_to='images', null=True)
+
+
+
+
+
+
+
+
+
+
+
