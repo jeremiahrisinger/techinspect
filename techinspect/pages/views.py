@@ -31,13 +31,16 @@ def signup_render(request):
         form = forms.SignupForm(request.POST, request.FILES)
         if form.is_valid():
             #TODO What do we need to do about password validation?
-            if utils.add_user(form.cleaned_data['username'], form.cleaned_data['password'], form.cleaned_data['user_image']):
-                img_obj = form.cleaned_data['user_image']
-                #Send user back to login page to login
-                #return HttpResponseRedirect('')
-                return render(request, 'signup/index.html', {'form': form, 'img_obj': img_obj})
+            if form.verify_password():
+                try:
+                    form.create_user()
+                except Exception:
+                    messages.error(request, "System failed to create user; please try again.")
+                else:
+                    #Send user back to login page to login
+                    return HttpResponseRedirect('/')
             else:
-                messages.error(request, "Signup attempt rejected; try again.")
+                messages.error(request, "Passwords were not equal; please try again.")
         else:
             messages.error(request, "User input was malformed or failed a test")
     else:
