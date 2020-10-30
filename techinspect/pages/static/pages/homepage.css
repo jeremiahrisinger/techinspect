@@ -112,18 +112,6 @@ p {
     background-color: whitesmoke;
     min-width: 200px;
     font-size: 20px;
-<<<<<<< Updated upstream
-    margin-top: 0%;
-    margin-bottom: 5%;
-    margin-left: 10%;
-    margin-right: 10%;
-    border-top: 0px;
-    border-left: 0px;
-    border-right: 0px;
-    border-bottom: 3px grey solid;
-    text-align: left;
-    padding: 20px;
-=======
 }
 .left {
     margin-right: 10%;
@@ -139,7 +127,6 @@ p {
     top: 0;
     overflow-x: hidden;
     padding-top: 20px;
->>>>>>> Stashed changes
 }
 
 
