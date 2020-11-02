@@ -1,0 +1,41 @@
+{% load static %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="{% static 'pages/styles.css' %}">
+    <title>CCSCC Schedule</title>
+  </head>
+  <body>
+    <div id = "banner">
+      <img src = "{% static 'Banner.png'  %}" id = "banner"></img>
+      </div>
+      <!-- Top navigation -->
+      <div class="topnav">
+
+        <!-- Centered link -->
+        <div class="topnav-centered">
+          <a href="../index.html" class="active">Home</a>
+        </div>
+
+        <!-- Left-aligned links (default) -->
+        <a href="../Inspections/inspections.html">Inspections</a>
+        <a href="../Waivers/waivers.html">Waivers</a>
+
+        <!-- Right-aligned links -->
+        <div class="topnav-right">
+          <a href="../Profile/profile.html">Profile</a>
+          <a href="schedule.html">Schedule</a>
+        </div>
+      </div>
+
+      <div id = "content">
+        <div id = "col1" class = "left"></div>
+        <div id = "col2" class = "mid">
+          <div id = "pageHeader">
+            <p class = "pageHeader">Schedule</p>
+          </div>
+         </div>
+        <div id = "col3" class = "right"></div>
+      </div>
+  </body>
+</html>

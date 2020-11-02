@@ -2,46 +2,40 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Sign-in page</title>
-        <link rel="stylesheet" type="text/css" href="{% static 'pages/homepage.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'pages/styles.css' %}">
+    <title>CCSCC</title>
     </head>
     <body>
-        
-            
-
-        <h1 class="header">
-            <img src="{% static "images/header_1.png" %}"  alt="Header" height=100></img>
-        </h1>
-        <ul class=right>
-            <li><a href="../home/index.html">Home</a></li>
-            <li><a href="/">News</a></li>
-            <li><a href="/">Contact</a></li>
-            <li><a href="/">About</a></li>
-            <li><a href="/">Profile</a></li>
-            <li><a href="/">Settings</a></li>
-            <li><a href="/">Waviers</a></li>
-            <li><a href="/">(Filler)</a></li>
-            <li><a href="/">(Filler)</a></li>
-        </ul>
-        <div class="left">
-            <h2>Your at the Home page!</h2>
-           
-            <p class="title">
-                Lorem ipsum dolor sit amet
-            </p>
-            <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-            sed do eiusmod tempor incididunt ut labore et dolore magna 
-            aliqua. Ut enim ad minim veniam, quis nostrud exercitation 
-            ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-            Duis aute irure dolor in reprehenderit in voluptate velit 
-            esse cillum dolore eu fugiat nulla pariatur. Excepteur sint 
-            occaecat cupidatat non proident, sunt in culpa qui officia 
-            deserunt mollit anim id est laborum.
-            </p>
+      <div id = "banner">
+        <img src = "{% static 'Banner.png'  %}" id = "banner"></img>
         </div>
-        <h1 class="logo">
-            <img src="{% static "images/logo.png" %}"  alt="CCSCC Logo" width=200 height=200></img>
-        </h1>
+        <!-- Top navigation -->
+        <div class="topnav">
+
+          <!-- Centered link -->
+          <div class="topnav-centered">
+            <a href="index.html" class="active">Home</a>
+          </div>
+
+          <!-- Left-aligned links (default) -->
+          <a href="Inspections/inspections.html">Inspections</a>
+          <a href="Waivers/waivers.html">Waivers</a>
+
+          <!-- Right-aligned links -->
+          <div class="topnav-right">
+            <a href="Profile/profile.html">Profile</a>
+            <a href="Schedule/schedule.html">Schedule</a>
+          </div>
+        </div>
+
+        <div id = "content">
+          <div id = "col1" class = "left"></div>
+          <div id = "col2" class = "mid">
+            <p>Champaign County Sports Car Club is a car club for drivers and car
+            enthusiasts.  Club meetings on the first Wed. of the month at 7:30pm
+             at Hickory River Smokehouse, 1706 N Cunningham Ave, Urbana.</p>
+           </div>
+          <div id = "col3" class = "right"></div>
+        </div>
     </body>
-</html>
+  </html>
