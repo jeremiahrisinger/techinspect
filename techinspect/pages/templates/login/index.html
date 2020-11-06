@@ -8,7 +8,7 @@
     <body>
         <h1>CHAMPAIGN COUNTY SPORTS CAR CLUB</h1>
             <div>
-                <h2>Login</h2>
+                <h2>Member Login</h2>
             {% if messages %}
             <ul class="messages">
                 {% for message in messages %}
@@ -23,11 +23,11 @@
 
                     {% endfor %}
                     
-                    <input type="submit" value="Login" style="text-align: center;">
+                    <input type="submit" value="login" class="button">
                 </form>
             </div>   
             <h1 class="logo">
-                <img src="{% static "images/logo.png"%}" width=200 height=200></img>
+                <img src="{% static "images/logo.png"%}" class="logoimage"></img>
             </h1>
             
     </body>
