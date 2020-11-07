@@ -24,7 +24,7 @@
 
                     {% endfor %}
                     
-                    <button type="submit" style="text-align: center;">Submit</button>
+                    <button type="submit" class="button">sign up</button>
                 </form>
             </div>
             {% if img_obj %}
@@ -32,7 +32,7 @@
                 <img src="{{ img_obj.image.url }}" alt="connect">
             {% endif %}
             <h1 class="logo">
-                <img src="{% static "images/logo.png"%}" width=200 height=200></img>
+                <img src="{% static "images/logo.png"%}" class="logoimage"></img>
             </h1>
             
     </body>
