@@ -1,4 +1,4 @@
-}
+
 .button{
     border: red solid 0px;
     width: 70%;
@@ -51,6 +51,12 @@
     width: 20vh;
     height: 20vh;
 }
+div.bannerimg{
+    background-image: url('../images/Banner.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
 body { 
     background-image: url('../images/minimalist-ferrari2.png');
     background-position: center;
