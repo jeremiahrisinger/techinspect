@@ -26,6 +26,18 @@ def login_render(request):
 def homepage_render(request):
     return render(request, 'home/index.html')
 
+def profile_render(request):
+        return render(request, 'Profile/profile.html')
+
+def inspection_render(request):
+        return render(request, 'Inspections/inspections.html')
+
+def schedule_render(request):
+        return render(request, 'Schedule/schedule.html')
+def waiver_render(request):
+        return render(request, 'Waivers/waivers.html')
+
+
 def signup_render(request):
     if request.method == 'POST':
         form = forms.SignupForm(request.POST, request.FILES)
@@ -46,3 +58,5 @@ def signup_render(request):
     else:
         form = forms.SignupForm()
     return render(request, 'signup/index.html', {'form': form})
+
+    
