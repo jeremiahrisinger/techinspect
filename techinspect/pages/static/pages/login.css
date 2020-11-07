@@ -8,7 +8,7 @@
     border-radius: 25px;
     background-color: red;
     margin: auto;
-    margin-top: 5vh;
+    margin-top: 10px;
     text-align: center;
     font-size: 20px;
     font-weight: bolder;
@@ -37,6 +37,7 @@
     position: fixed;
     width: 100%;
     height: 20vh;
+    max-height: 300px;
     bottom: -1px;
     color: black;
     font-style: normal;
@@ -55,11 +56,12 @@ body {
     background-size: cover;
     background-color: red;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    min-height: 750px;
+    min-height: 125vh;
     min-width: 400px;
     margin: 0%;
 }
 h1 {
+
     color: black;
     font-style: normal;
     font-size: 4vw ;
@@ -85,26 +87,22 @@ form {
     font-size: 20px;
     text-align: center;
     min-height: 200px;
-    max-height: 390px;
+
     min-width: 100px;
     margin: 0%;
 }
 div {
-    border: 10px;
+    border: 1px;
     border-color: whitesmoke;
     border-style: solid;
     border-radius: 25px;
-
     background-color: whitesmoke;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    margin: 3vh auto;
-
-    padding: 3%;
-
+    margin: 10vh auto 30vh auto;
+    padding: 5vh 5vw;
     width: 70vw;
-
     min-height: 250px;
-    max-height: 400px;
+
     min-width: 150px;
     max-width: 500px;
     text-align: center;
@@ -116,9 +114,10 @@ p {
 
 #id_username, #id_password, #id_confirm_pass, #id_email{
     height: 50px;
-    max-height: 50px;
+
+    min-width: 300px;
     width: 70%;
-    max-width: 400px;
+    max-width: 500px;
     margin: 1vh;
     background-color: lightgrey;
     border: lightgray solid 0px;
