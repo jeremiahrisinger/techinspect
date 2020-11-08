@@ -2,37 +2,30 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Sign-in page</title>
         <link rel="stylesheet" type="text/css" href="{% static 'pages/homepage.css' %}">
+    <title>CCSCC</title>
     </head>
     <body>
-        
-            
-
-        <h1> CHAMPAIGN COUNTY SPORTS CAR CLUB
-            <!--img src="{% static "images/header_1.png" %}"  alt="Header" height=100></img-->
-        </h1>
+      <h1>CHAMPAIGN COUNTY SPORTS CAR CLUB</h1>
+        <!--img src = "{% static 'Banner.png'  %}" id = "banner"></img>
+        <!-- Top navigation -->
         <ul>
-            <li><a href="../home/">Home</a></li>
-            <li><a href="/">News</a></li>
-            <li><a href="/">Contact</a></li>
-            <li><a href="/">About</a></li>
-            <li><a href="/">Profile</a></li>
-            <li><a href="/">Settings</a></li>
-            <li><a href="/">Waviers</a></li>
-            <li><a href="/">Inspections</a></li>
 
+          <!-- Centered link -->
+          <li><a href="../home/" class="active">Home</a></li>
+          <li><a href="../Inspections/">Inspections</a></li>
+          <li><a href="../Waivers/">Waivers</a></li>
+          <li><a href="../Profile/">Profile</a></li>
+          <li><a href="../Schedule/">Schedule</a></li>
         </ul>
-        <div>
-            <h2>Your at the home page!</h2>
-           
-            <p class="title">
-                title
+
+          <div>
+            <p>
+              Champaign County Sports Car Club is a car club for drivers and car
+              enthusiasts.  Club meetings on the first Wed. of the month at 7:30pm
+              at Hickory River Smokehouse, 1706 N Cunningham Ave, Urbana.
             </p>
-            <table></table>
-        </div>
-        <h1 class="logo">
-            <img src="{% static "images/logo.png" %}"  alt="CCSCC Logo" class="logoimage"></img>
-        </h1>
+            <p class="bannerimg"></p>
+           </div>
     </body>
-</html>
+  </html>
