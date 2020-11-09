@@ -15,6 +15,20 @@
     font-variant: small-caps;
     padding: 5px;
 }
+.buttonsmall{
+    border: whitesmoke solid 0px;
+    width: 100px;
+    height: 15px;
+    border-radius: 25px;
+    background-color: whitesmoke;
+    margin: auto;
+    margin-top: 10px;
+    text-align: center;
+    font-size: 10px;
+    font-weight: bolder;
+    font-variant: small-caps;
+    padding: 2px;
+}
 .messages{
     margin: auto;
     padding: 0px;
@@ -49,6 +63,14 @@
 .logoimage{
     width: 20vh;
     height: 20vh;
+}
+.profile{
+    border: 1px solid #000 ;
+    border-radius: 50px;
+}
+.carimg{
+    max-height: 100px;
+    max-width: 100px;
 }
 body { 
     background-image: url('../images/minimalist-ferrari2.png');
@@ -96,6 +118,7 @@ div {
     border-style: solid;
     border-radius: 25px;
     background-color: whitesmoke;
+    display: flexbox;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     margin: 10vh auto 30vh auto;
     padding: 5vh 5vw;
@@ -106,28 +129,24 @@ div {
     max-width: 500px;
     text-align: center;
 }
+div div {
+    border: 1px;
+    border-color:  rgb(249, 93, 32);
+    border-style: solid;
+    border-radius: 10px;
+    background-color:  rgb(249, 93, 32);
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    margin: 5px;
+    padding: 10px;
+    width: 120px;
+    height: fit-content;
+    min-height: 150px;
+    text-align: center;
+}
 p {
-    text-align: center;
-    margin: 0%;
-}
-.title {
-    text-align: center;
-    font-size: 20px;
-}
-.left {
-    margin-right: 10%;
-}
-.right {
-    background-color: #f1f1f1;
-    margin-top: 100px;
-    margin-right: 0%;
-    height: 100%;
-    width: 100px;
-    right: 0;
-    position: fixed;
-    top: 0;
-    overflow-x: hidden;
-    padding-top: 20px;
+    text-align: left;
+    font-size: 14px;
+    margin: 3px;
 }
 
 
@@ -142,21 +161,21 @@ label, input {
 }
 ul {
     margin: 0;
-    padding: 5px;
+    padding: 0px;
     /*font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;*/
     font-size: 16px;
     list-style: none; 
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     justify-content: space-evenly;
     height: fit-content;
     background-color:red;
 }
 
 li a {
-    flex-basis: auto;
-
+    flex-basis: content;
+    width: 15.5vw;
     display: block;
     color: #000;
     padding: 3vh 2vw;
@@ -168,6 +187,11 @@ li a {
 li a.active {
     font-weight: bold;
     background-color: whitesmoke;
+    border: 0px whitesmoke solid;
+
+    border-radius:10px;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
 }
 
 li a:hover:not(.active) {
