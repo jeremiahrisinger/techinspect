@@ -8,10 +8,10 @@ urlpatterns = [
         path('', views.login_render, name='Login'),
         path('home/', views.homepage_render, name="Homepage"),
         path('signup/', views.signup_render, name="Signup"),
-        path('Profile/', views.profile_render, name="Profile"),
-        path('Waivers/', views.waiver_render, name="Waivers"),
-        path('Inspections/', views.inspection_render, name="Inspections"),
-        path('Schedule/', views.schedule_render, name="Schedule"),
+        path('profile/', views.profile_render, name="Profile"),
+        path('waivers/', views.waiver_render, name="Waivers"),
+        path('inspections/', views.inspection_render, name="Inspections"),
+        path('schedule/', views.schedule_render, name="Schedule"),
         path('admin/', admin.site.urls),
 ]
 
