@@ -14,6 +14,10 @@
     font-weight: bolder;
     font-variant: small-caps;
     padding: 5px;
+    cursor: pointer;
+}
+.button:hover, .button:focus{
+    background-color: darkred;
 }
 .messages{
     margin: auto;
@@ -52,6 +56,12 @@
 }
 body { 
     background-image: url('../images/minimalist-ferrari.png');
+    max-width:300px;
+    height: 20vh;
+    max-height: 300px;
+}
+body { 
+    background-image: url('../images/minimalist-ferrari.jpg');
     background-position: center;
     background-size: cover;
     background-color: red;

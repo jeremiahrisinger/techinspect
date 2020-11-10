@@ -25,6 +25,14 @@ def login_render(request):
 
 def homepage_render(request):
     return render(request, 'home/index.html')
+def schedule_render(request):
+    return render(request, 'Schedule/schedule.html')
+def waiver_render(request):
+    return render(request, 'Waivers/waivers.html')
+def profile_render(request):
+    return render(request, 'Profile/profile.html')
+def inspection_render(request):
+    return render(request, 'Inspections/inspections.html')
 
 def profile_render(request):
     return render(request, 'profile/profile.html')

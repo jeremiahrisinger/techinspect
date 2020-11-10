@@ -1,0 +1,55 @@
+{% load static %}
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" type="text/css" href="{% static 'pages/homepage.css' %}">
+    <title>CCSCC</title>
+    </head>
+    <body>
+      <h1>CHAMPAIGN COUNTY SPORTS CAR CLUB</h1>
+
+        <ul>
+
+          <li><a href="../home/">Home</a></li>
+          <li><a href="../Inspections/" class="active">Inspections</a></li>
+          <li><a href="../Waivers/">Waivers</a></li>
+          <li><a href="../Profile/">Profile</a></li>
+          <li><a href="../Schedule/">Schedule</a></li>
+        </ul>
+
+          <div>
+            <p>
+              Vehicle Inspections
+            </p>
+            <button class="collapsible">Exterior</button>
+            <form action="" class="content">
+              <ul class="inspectionsection" >
+                <li class="inspectionelement"><input type="checkbox" class="box">No play in the wheel bearings</li>
+                <li class="inspectionelement"><input type="checkbox" class="box">Wheels are tight and have no visible cracks</li>
+                <li class="inspectionelement"><input type="checkbox" class="box">Hub caps or center caps removed or firmly secured by lug nuts</li>
+                <li class="inspectionelement"><input type="checkbox" class="box">Tires must be in good condition with no cord/belts showing or cracks</li>
+                <li class="inspectionelement"><input type="checkbox" class="box">Tires tread depth</li>
+                <li class="inspectionelement"><input type="checkbox" class="box">Break pads/rotars in good condition</li>
+                <li class="inspectionelement"><input type="checkbox" class="box">No loose body panels</li>
+                <li class="inspectionelement"><input type="checkbox" class="box">Numbers on & clearly visible on body</li>
+              </ul>
+            </form>
+          </div>
+          <script>
+            var coll = document.getElementsByClassName("collapsible");
+            var i;
+            
+            for (i = 0; i < coll.length; i++) {
+              coll[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var content = this.nextElementSibling;
+                if (content.style.display === "block") {
+                  content.style.display = "none";
+                } else {
+                  content.style.display = "block";
+                }
+              });
+            }
+          </script>
+    </body>
+  </html>
