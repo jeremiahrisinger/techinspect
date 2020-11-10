@@ -1,3 +1,8 @@
+input.box{
+    margin: 10px;
+    height: 30px;
+    width: 30px; 
+}
 .button{
     border: red solid 0px;
     width: 70%;
@@ -49,17 +54,19 @@
 }
 .collapsible{
     background-color: red;
-    color: white;
+    color: black;
     cursor: pointer;
     padding: 18px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
     width: 100%;
     border: none;
     text-align: left;
     outline: none;
-    font-size: 15px;
+    font-size: 12px;
 }
 .content {
-    padding: 0 18px;
+    padding:0px;
     display: none;
     overflow: hidden;
     background-color: whitesmoke;
@@ -83,8 +90,18 @@
     background-color: #FFBABA;
 }
 .inspectionsection{
+    flex-direction: column;
     width: fit-content;
     height: fit-content;
+    max-height: none;
+    max-width: none;
+    text-align: left;
+}
+.inspectionelement{
+    flex-wrap: wrap;
+    flex-direction: column;
+    background-color: lightgray;
+
 }
 .logo {
     position: fixed;
@@ -148,7 +165,7 @@ form {
     text-align: center;
     min-height: 200px;
 
-    min-width: 100px;
+    min-width: fit-content;
     margin: 0%;
 }
 div {
