@@ -234,12 +234,6 @@ div div {
     min-height: 150px;
     text-align: center;
 }
-p {
-    text-align: left;
-    font-size: 14px;
-    margin: 3px;
-}
-
 
 label, input {
     height: 30px;
