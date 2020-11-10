@@ -1,12 +1,12 @@
 from pages import db_validators as dbv
 
+from datetime import date
+
 from django.contrib.auth.models import AbstractUser
 from django.db import models 
 
 from django.db.models import *
 
-
-# Create your models here. 
 
 class TIUser(AbstractUser): 
     VIN = models.ForeignKey('Vehicle', on_delete=models.CASCADE, null=True) #Have to link by name of class since it is created later on in file
@@ -14,8 +14,6 @@ class TIUser(AbstractUser):
     image = models.ImageField(upload_to='images', null=True)
     def __str__(self):
         return self.username + " " + self.password #TODO remove this after project complete
-
-
 
 class Vehicle(models.Model): 
     VIN = models.CharField(max_length=17, primary_key=True) 
@@ -45,8 +43,8 @@ class Inspection(models.Model):
 class Waiver(models.Model): 
     #TODO: Is defining an ID here necessary or should we just use the one provided by Django?
     waiverID = models.AutoField(primary_key=True) 
-    waiverDate = models.CharField(max_length=30) 
-    waiverComplete = models.CharField(max_length=100) 
+    waiverDate = models.DateField(default=date.today) 
+    waiverName = models.CharField(max_length=100) 
     UUID = models.ForeignKey(TIUser, on_delete=DO_NOTHING) 
 
 class Image(models.Model):

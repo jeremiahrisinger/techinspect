@@ -27,15 +27,22 @@ def homepage_render(request):
     return render(request, 'home/index.html')
 
 def profile_render(request):
-        return render(request, 'profile/profile.html')
+    return render(request, 'profile/profile.html')
 
 def inspection_render(request):
-        return render(request, 'inspections/inspections.html')
+    return render(request, 'inspections/inspections.html')
 
 def schedule_render(request):
-        return render(request, 'schedule/schedule.html')
+    return render(request, 'schedule/schedule.html')
 def waiver_render(request):
-        return render(request, 'waivers/waivers.html')
+    if request.method == 'POST':
+        form = forms.WaiverForm(request.POST)
+        if form.is_valid():
+            pass
+                #Add the waiver into the database for the given person.
+    else:
+        form = forms.WaiverForm()
+    return render(request, 'waivers/waivers.html', {'waiver_form': form})
 
 
 def signup_render(request):

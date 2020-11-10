@@ -1,13 +1,12 @@
 from django import forms
 from django.forms import ModelForm
-from pages.models import Image, TIUser
+from pages.models import Image, TIUser, Waiver
 
 class LoginForm(forms.Form):
     #max_length matches max_length for username field in pages/models.TIUser
     username = forms.CharField(label="username", max_length=150, widget=forms.TextInput(attrs={'placeholder': 'Username'}))
     password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Password'}))
 
-#TODO convert this to a ModelForm so we can easily save it in utils.add_user
 class SignupForm(forms.Form):
     username = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Username'}))
     email = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Email'}))
@@ -37,4 +36,7 @@ class ImageForm(ModelForm):
         model = Image
         fields = ['image']
 
-
+class WaiverForm(ModelForm):
+    class Meta:
+        model = Waiver
+        fields = ['waiverDate', 'waiverName']

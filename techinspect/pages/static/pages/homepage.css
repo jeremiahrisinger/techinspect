@@ -181,3 +181,7 @@ li a:hover:not(.active) {
     background-color: rgb(249, 93, 32);
 }
 
+#waiver {
+    max-width: 85%;
+    text-align: left;
+}
