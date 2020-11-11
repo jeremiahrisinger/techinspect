@@ -163,6 +163,7 @@ div.bannerimg{
 body { 
     background-image: url('../images/minimalist-ferrari2.png');
     background-position: center;
+    background-attachment: fixed;
     background-size: cover;
     background-color: red;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -274,6 +275,9 @@ li a {
 li a.active {
     font-weight: bold;
     background-color: whitesmoke;
+    border: whitesmoke solid 0px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
 }
 
 li a:hover:not(.active) {
