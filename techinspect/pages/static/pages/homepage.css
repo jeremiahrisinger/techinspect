@@ -274,6 +274,9 @@ li a {
 li a.active {
     font-weight: bold;
     background-color: whitesmoke;
+    border: whitesmoke solid 0px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
 }
 
 li a:hover:not(.active) {
