@@ -1,0 +1,283 @@
+.button{
+    border: red solid 0px;
+    width: 70%;
+    max-width: 400px;
+    min-height: 30px;
+    height: 50px;
+    max-height: 50px;
+    border-radius: 25px;
+    background-color: red;
+    margin: auto;
+    margin-top: 10px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bolder;
+    font-variant: small-caps;
+    padding: 5px;
+}
+.button:hover, .button:focus{
+    background-color: rgb(168, 0, 0);
+}
+
+.button-small{
+    border: whitesmoke solid 0px;
+    width: 100px;
+    height: 15px;
+    border-radius: 25px;
+    background-color: whitesmoke;
+    margin: auto;
+    margin-top: 10px;
+    text-align: center;
+    font-size: 10px;
+    font-weight: bolder;
+    font-variant: small-caps;
+    padding: 2px;
+    cursor: pointer;
+}
+.button-small:hover, .button-small:focus{
+    background-color: lightgray;
+}
+
+.car-img{
+    max-height: 100px;
+    max-width: 100px;
+}
+.ck-box{
+    height: 20px;
+    width: 20px;
+    margin: 10px;
+    
+}
+
+.collapsible {
+    background-color: #777;
+    color: white;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+}
+
+.active, .collapsible:hover {
+    background-color: #555;
+  }
+  
+
+
+.div-lvl1{
+    border: 1px;
+    border-color: whitesmoke;
+    border-style: solid;
+    border-radius: 25px;
+    background-color: whitesmoke;
+    display: flexbox;
+    font-family: 'Gill Sans', 'Gill Sans MT', 'Calibri', 'Trebuchet MS', sans-serif;
+    margin: 10vh auto 30vh auto;
+    padding: 5vh 5vw;
+    width: 90vw;
+    min-height: 250px;
+    min-width: 150px;
+    max-width: 500px;
+    text-align: center;
+}
+
+.div-lvl2{
+    border: 1px;
+    border-color:  lightgray;
+    border-style: solid;
+    border-radius: 10px;
+    background-color:  white;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    margin: 5px;
+    padding: 10px;
+    width: 90%;
+    height: fit-content;
+    text-align: center;
+}
+
+.error{
+    border: 1px solid;
+    border-radius: 50px;
+    margin: auto;
+    padding: 5px;
+    height: 40px;
+    width: 90%;
+    min-width: 330px;
+    max-width: 500px;
+    color: #D8000C;
+    font-size: 16px;
+    background-color: #FFBABA;
+}
+
+.home-background{
+    background-image: url('../images/minimalist-ferrari2.png');
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+    background-color: red;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    min-height: 125vh;
+    min-width: 400px;
+    margin: 0%;
+}
+.inspect-item{
+    list-style: none;
+    text-align: left;
+    justify-content: space-evenly;
+    display: flexbox;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.inspect-list{
+    list-style: none;
+    text-align: left;
+    justify-content: left;
+}
+
+.inspect-notes{
+    height: fit-content;
+    width: 100%;
+    min-height: 60px;
+    min-width: 300px;
+    text-align: left;
+}
+
+.inspect-item-text{
+    width: fit-content;
+    padding: 10px;
+    margin: 0px;
+    word-wrap: normal;
+}
+
+.login-background{
+    background-image: url('../images/minimalist-ferrari.png');
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+    background-color: red;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    min-height: 125vh;
+    min-width: 400px;
+    margin: 0%;
+}
+.login-form{
+    background-color: whitesmoke;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 20px;
+    text-align: center;
+    min-height: 200px;
+    min-width: fit-content;
+    margin: 0%;
+}
+
+.logo {
+    background-color: whitesmoke;
+    position: fixed;
+    width: 100%;
+    height: 20vh;
+    max-height: 300px;
+    bottom: -1px;
+    color: black;
+    cursor: pointer;
+    padding: 20px;
+}
+
+.logo-image{
+    width: 20vh;
+    height: 20vh;
+    justify-self: center;
+}
+
+.messages{
+    margin: auto;
+    padding: 0px;
+    
+}
+
+.nav-bar{
+    margin: 0px;
+    padding: 0px;
+    padding-bottom: 5px;
+    /*font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;*/
+    font-size: 16px;
+    list-style: none; 
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    height: fit-content;
+    background-color:red;
+}
+
+.nav-bar-item a{
+    flex-basis: auto;
+    flex-basis: content;
+    width: 15.5vw;
+    display: block;
+    color: #000;
+    padding: 3vh 2vw;
+    text-decoration: none;
+    text-align: center;
+    background-color: none
+}
+
+.nav-bar-item a.active{
+    font-weight: bold;
+    background-color: whitesmoke;
+    border: whitesmoke solid 0px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.nav-bar-item a:hover:not(.active){
+    background-color: rgb(249, 93, 32);
+}
+
+.profile{
+    border: 1px solid #000 ;
+    border-radius: 50px;
+}
+.title{
+    margin: 0;
+    color: black;
+    font-style: normal;
+    font-size: 4vw ;
+    text-align: center;
+    background-color: whitesmoke;
+    padding: 20px
+}
+
+#content {
+    padding: 0 18px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    background-color: #f1f1f1;
+}
+
+#id_username, #id_password, #id_confirm_pass, #id_email{
+    height: 50px;
+
+    min-width: 300px;
+    width: 70%;
+    max-width: 500px;
+    margin: 1vh;
+    background-color: lightgrey;
+    border: lightgray solid 0px;
+    border-radius: 25px;
+    font-size: 16px;
+    font-style: italic;
+    text-align: left;
+    padding: 12.5px 25px;
+}
+#waiver {
+    max-width: 85%;
+    text-align: left;
+    border: 1px whitesmoke solid;
+
+    border-radius:10px;
+
+}

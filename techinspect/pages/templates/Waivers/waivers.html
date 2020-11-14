@@ -2,26 +2,25 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <link rel="stylesheet" type="text/css" href="{% static 'pages/homepage.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'pages/website.css' %}">
     <title>CCSCC</title>
     </head>
-    <body>
-      <h1>CHAMPAIGN COUNTY SPORTS CAR CLUB</h1>
+    <body class="home-background">
+      <h1 class="title">CHAMPAIGN COUNTY SPORTS CAR CLUB</h1>
         <!--img src = "{% static 'Banner.png'  %}" id = "banner"></img>
         <!-- Top navigation -->
-        <ul>
+        <ul class="nav-bar">
 
           <!-- Centered link -->
-          <li><a href="../home/">Home</a></li>
-          <li><a href="../inspections/">Inspections</a></li>
-          <li><a href="../waivers/" class="active">Waivers</a></li>
-          <li><a href="../profile/">Profile</a></li>
-          <li><a href="../schedule/">Schedule</a></li>
+          <li class="nav-bar-item"><a href="../home/">Home</a></li>
+          <li class="nav-bar-item"><a href="../inspections/">Inspections</a></li>
+          <li class="nav-bar-item"><a href="../waivers/" class="active">Waivers</a></li>
+          <li class="nav-bar-item"><a href="../profile/">Profile</a></li>
+          <li class="nav-bar-item"><a href="../schedule/">Schedule</a></li>
         </ul>
 
-          <div id="waiver">
-   IN CONSIDERATION of my being permitted into racing programs to enter, for any purposes, the RESTRICTED AREA (herein defined as, including but not limited to the racing surface, pit areas, infield, burn-out area, approach area, shut down area, and all walkways, concessions, and other appurtenant areas where any activity related to the event shall take place or where special authorization, permission, or credentials are required, or where admittance to the general public is restricted or prohibited), or to compete, officiate, observe, work for, or for any purpose participate in the event in any way, I agree:
-   <br>
+          <div class="div-lvl1" id="waiver">
+          <h2 class="title">Annual release and waiver of liability, assumption of risk and indemnity agreements</h2>
    <br>
    1. I AM AWARE OF THE NATURE of the EVENT(S) and my experience and capabilities, and believe myself to be qualified to participate in the Event(s). I will inspect the premises, facilities, and equipment to be used, or with which I may come in contact, AND IF I BELIEVE ANYTHING IS UNSAFE, I WILL IMMEDIATELY LEAVE THE RESTRICTED AREA AND REFUSE TO PARTICIPATE FURTHER IN THE EVENT(S).
    <br>
@@ -42,7 +41,7 @@
    <br>
    <br>
 
-   I HAVE READ THIS RELEASE AND WAIVER OF LIABILITY, ASSUMPTION OF RISK, AND INDEMNITY AGREEMENT, AND FULLY UNDERSTAND THAT BY SIGNING IT I GIVE UP SUBSTANTIAL RIGHTS I WOULD OTHERWISE HAVE TO RECOVER DAMAGES FOR LOSSES OCCASIONED BY THE RELEASEES' NEGLIGENCE, AND SIGN IT VOLUNTARILY AND WITHOUT INDUCEMENT OF ANY NATURE AND INTEND FOR IT TO BE ENFORCED TO THE GREATED EXTENT ALLOWED BY LAW.
+   <b>I HAVE READ THIS RELEASE AND WAIVER OF LIABILITY, ASSUMPTION OF RISK, AND INDEMNITY AGREEMENT, AND FULLY UNDERSTAND THAT BY SIGNING IT I GIVE UP SUBSTANTIAL RIGHTS I WOULD OTHERWISE HAVE TO RECOVER DAMAGES FOR LOSSES OCCASIONED BY THE RELEASEES' NEGLIGENCE, AND SIGN IT VOLUNTARILY AND WITHOUT INDUCEMENT OF ANY NATURE AND INTEND FOR IT TO BE ENFORCED TO THE GREATED EXTENT ALLOWED BY LAW.<b>
    <br>
    <br>
                 <form method="POST">
