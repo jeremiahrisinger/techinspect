@@ -70,21 +70,22 @@ input.box{
 }
 .checkboxlist{
     max-height: 400px;
-    flex-direction: column;
+    flex-direction: row;
     flex-wrap: wrap;
     background-color: whitesmoke;
 }
-.checkboxitem{
-    height: 10px;
-    width: 10px;
+#checkboxitem{
+    height: 20px;
+    width: 20px;
 }
 .collapsible{
     background-color: red;
     color: black;
     cursor: pointer;
     padding: 18px;
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
+    border: 1px red solid ;
+    border-radius: 15px;
+    border-bottom: 10px lightgray solid;
     width: 100%;
     border: none;
     text-align: left;
@@ -93,9 +94,9 @@ input.box{
 }
 .content {
     padding:0px;
-    display: none;
-    overflow: hidden;
     background-color: whitesmoke;
+    flex-wrap: wrap;
+    justify-content: left;
   }
 .messages{
     margin: auto;
@@ -114,20 +115,6 @@ input.box{
     color: #D8000C;
     font-size: 16px;
     background-color: #FFBABA;
-}
-.inspectionsection{
-    flex-direction: column;
-    width: fit-content;
-    height: fit-content;
-    max-height: none;
-    max-width: none;
-    text-align: left;
-}
-.inspectionelement{
-    flex-wrap: wrap;
-    flex-direction: column;
-    background-color: lightgray;
-
 }
 .logo {
     position: fixed;
@@ -246,15 +233,15 @@ label, input {
     text-align: left;
 }
 ul {
-    margin: 0;
+    margin: 0px;
     padding: 0px;
+    padding-bottom: 5px;
     /*font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;*/
     font-size: 16px;
     list-style: none; 
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    flex-wrap: nowrap;
     justify-content: space-evenly;
     height: fit-content;
     background-color:red;

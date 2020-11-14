@@ -18,12 +18,41 @@
           <li><a href="../profile/">Profile</a></li>
           <li><a href="../schedule/">Schedule</a></li>
         </ul>
-
           <div>
             <p>
               Vehicle Inspections
             </p>
-            <p class="bannerimg"></p>
-           </div>
+            <button class="collapsible">Exterior</button>
+            <ul class="content">
+              <li><input type="checkbox" name="" id="checkboxitem">No play in the wheel bearings</li>
+              <li><input type="checkbox" name="" id="checkboxitem">Wheels are tight and have no visible crack</li>
+              <li><input type="checkbox" name="" id="checkboxitem">Hubcaps or center caps removed or firmly secured by lug nuts</li>
+              <li><input type="checkbox" name="" id="checkboxitem">Tires must be in good condition with no cords/belts showing or cracks</li>
+              <li><input type="checkbox" name="" id="checkboxitem">Tire tread depth (as appropriate)</li>
+              <li><input type="checkbox" name="" id="checkboxitem">Brake pads/rotors in good condition</li>
+              <li><input type="checkbox" name="" id="checkboxitem">No loose body panels</li>
+              <li><input type="checkbox" name="" id="checkboxitem">Numbers clearly visible on body</li>
+            </ul>
+            <button class="collapsible">Interior</button>
+            <button class="collapsible">Trunk</button>
+            <button class="collapsible">Other</button>
+          </div>
+          <script>
+            var coll = document.getElementsByClassName("collapsible");
+            var i;
+            
+            for (i = 0; i < coll.length; i++) {
+              coll[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var content = this.nextElementSibling;
+                if (content.style.maxHeight){
+                  content.style.maxHeight = null;
+                } else {
+                  content.style.maxHeight = content.scrollHeight + "px";
+                } 
+              });
+            }
+          </script>
+            
     </body>
   </html>
