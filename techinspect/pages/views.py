@@ -13,36 +13,29 @@ def login_render(request):
             #IMPORTANT: TO ACCESS FORM DATA ALWAYS USE cleaned_data['name of field']
             try:
                 if utils.login(form.cleaned_data['username'], form.cleaned_data['password']):
-                    return HttpResponseRedirect('home/') 
+                    return HttpResponseRedirect('home/' + utils.user_list[form.cleaned_data['username']].uuid + '/') 
                 else:
                     messages.error(request, "Login failed due to incorrect username/password")
             except ObjectDoesNotExist:
-                    messages.error(request, mark_safe("Your username isn't associated with an account. </br>Click <a href='signup/'>signup</a> to create an account."))
+                    messages.error(request, mark_safe("Your username isn't associated with an account. </br>Click <a href='signup/'>here</a> to create an account."))
     else:
         form = forms.LoginForm()
     return render(request, 'login/index.html', {'form': form})
 
 
-def homepage_render(request):
-    return render(request, 'home/index.html')
-def schedule_render(request):
-    return render(request, 'Schedule/schedule.html')
-def waiver_render(request):
-    return render(request, 'Waivers/waivers.html')
-def profile_render(request):
-    return render(request, 'Profile/profile.html')
-def inspection_render(request):
-    return render(request, 'Inspections/inspections.html')
+def homepage_render(request, uuid):
+    print(uuid)
+    return render(request, 'home/index.html', {'uuid': uuid})
 
-def profile_render(request):
-    return render(request, 'profile/profile.html')
+def profile_render(request, uuid):
+    return render(request, 'profile/profile.html', {'uuid': uuid})
 
-def inspection_render(request):
-    return render(request, 'inspections/inspections.html')
+def inspection_render(request, uuid):
+    return render(request, 'inspections/inspections.html', {'uuid': uuid})
 
-def schedule_render(request):
-    return render(request, 'schedule/schedule.html')
-def waiver_render(request):
+def schedule_render(request, uuid):
+    return render(request, 'schedule/schedule.html', {'uuid': uuid})
+def waiver_render(request, uuid):
     if request.method == 'POST':
         form = forms.WaiverForm(request.POST)
         if form.is_valid():
@@ -50,7 +43,7 @@ def waiver_render(request):
                 #Add the waiver into the database for the given person.
     else:
         form = forms.WaiverForm()
-    return render(request, 'waivers/waivers.html', {'waiver_form': form})
+    return render(request, 'waivers/waivers.html', {'waiver_form': form, 'uuid': uuid})
 
 
 def signup_render(request):
