@@ -3,12 +3,12 @@
     <head>
         <meta charset="utf-8">
         <title>Signin</title>
-        <link rel="stylesheet" type="text/css" href="{% static 'pages/login.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'pages/website.css' %}">
     </head>
-    <body>
-        <h1>CHAMPAIGN COUNTY SPORTS CAR CLUB</h1>
-            <div>
-                <h2>Member Login</h2>
+    <body class="login-background">
+        <h1 class="title">CHAMPAIGN COUNTY SPORTS CAR CLUB</h1>
+            <div class="div-lvl1">
+                <h2 class="div-head">Member Login</h2>
             {% if messages %}
             <ul class="messages">
                 {% for message in messages %}
@@ -16,18 +16,19 @@
                 {% endfor %}
             </ul>
             {% endif %}
-                <form action="" method="POST">
+                <form action="" method="POST" class="login-form">
                     {% csrf_token %}
                     {% for field in form %}
                     <p> {{ field }} </p>
 
                     {% endfor %}
                     
-                    <input type="submit" value="login" class="button">
+                    <p><input type="submit" value="login" class="button"></p>
+                    <img src="{% static "images/logo.png"%}" class="logo-image"></img>
                 </form>
             </div>   
             <h1 class="logo">
-                <img src="{% static "images/logo.png"%}" class="logoimage"></img>
+                
             </h1>
             
     </body>

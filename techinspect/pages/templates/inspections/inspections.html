@@ -6,17 +6,14 @@
     <title>CCSCC</title>
     </head>
     <body>
-      <h1>CHAMPAIGN COUNTY SPORTS CAR CLUB</h1>
-        <!--img src = "{% static 'Banner.png'  %}" id = "banner"></img>
-        <!-- Top navigation -->
+      <h1 class="title">CHAMPAIGN COUNTY SPORTS CAR CLUB</h1>
+        <img src = "{% static 'Banner.png'  %}" id = "banner"></img>
         <ul>
-
-          <!-- Centered link -->
           <li><a href="/home/{{uuid}}/">Home</a></li>
           <li><a href="/inspections/{{uuid}}/" class="active">Inspections</a></li>
           <li><a href="/waivers/{{uuid}}/">Waivers</a></li>
           <li><a href="/profile/{{uuid}}/">Profile</a></li>
-          <li><a href="/cars/{{uuid}}/">Your cars</a></li>
+          <li><a href="/schedule/{{uuid}}/">Schedule</a></li>
         </ul>
           <div>
             <p>
@@ -56,7 +53,6 @@
             {% endif %}
             <p class="bannerimg"></p>                                       
 
-
-          </div>
+            
     </body>
   </html>
