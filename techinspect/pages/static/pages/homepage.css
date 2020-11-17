@@ -1,8 +1,3 @@
-input.box{
-    margin: 10px;
-    height: 30px;
-    width: 30px; 
-}
 .button{
     border: red solid 0px;
     width: 70%;
@@ -19,11 +14,6 @@ input.box{
     font-weight: bolder;
     font-variant: small-caps;
     padding: 5px;
-}
-.messages{
-    margin: auto;
-    padding: 0px;
-    
 }
 .error{
     border: 1px solid;
@@ -68,76 +58,6 @@ input.box{
 .buttonsmall:hover, .buttonsmall:focus{
     background-color: lightgray;
 }
-.checkboxlist{
-    max-height: 400px;
-    flex-direction: row;
-    flex-wrap: wrap;
-    background-color: whitesmoke;
-}
-#checkboxitem{
-    height: 20px;
-    width: 20px;
-}
-.collapsible{
-    background-color: red;
-    color: black;
-    cursor: pointer;
-    padding: 18px;
-    border: 1px red solid ;
-    border-radius: 15px;
-    border-bottom: 10px lightgray solid;
-    width: 100%;
-    border: none;
-    text-align: left;
-    outline: none;
-    font-size: 12px;
-}
-.content {
-    padding:0px;
-    background-color: whitesmoke;
-    flex-wrap: wrap;
-    justify-content: left;
-  }
-.messages{
-    margin: auto;
-    padding: 0px;
-    
-}
-.error{
-    border: 1px solid;
-    border-radius: 50px;
-    margin: auto;
-    padding: 5px;
-    height: 40px;
-    width: 90%;
-    min-width: 330px;
-    max-width: 500px;
-    color: #D8000C;
-    font-size: 16px;
-    background-color: #FFBABA;
-}
-.logo {
-    position: fixed;
-    width: 100%;
-    height: 20vh;
-    max-height: 300px;
-    bottom: -1px;
-    color: black;
-    font-style: normal;
-    text-align: center;
-    background-color: whitesmoke;
-    padding: 10px;
-    margin: 0;
-}
-.logoimage{
-    width: 20vh;
-    height: 20vh;
-}
-div.bannerimg{
-    background-image: url('../images/Banner.png');
-    background-size: cover;
-    background-repeat: no-repeat;
-}
 
 .profile{
     border: 1px solid #000 ;
@@ -168,14 +88,6 @@ h1 {
     padding: 20px
 }
 
-h2 {
-    color: black;
-    background-color: whitesmoke;
-    text-align: center;
-    font-size: 30px;
-    margin: 0%;
-    padding: 1%;
-}
 
 form {
     background-color: whitesmoke;
@@ -282,7 +194,4 @@ li a:hover:not(.active) {
     border-top-right-radius: 0px;
 }
 
-li a:hover:not(.active) {
-    background-color: rgb(249, 93, 32);
-}
 
