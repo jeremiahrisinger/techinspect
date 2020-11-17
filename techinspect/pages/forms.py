@@ -1,6 +1,9 @@
 from django import forms
 from django.forms import ModelForm
-from pages.models import Image, TIUser, Waiver
+from pages.models import Image, TIUser, Waiver, Vehicle, Inspection
+from django.forms.widgets import TextInput, NumberInput
+from datetime import datetime
+from pages import utils
 
 class LoginForm(forms.Form):
     #max_length matches max_length for username field in pages/models.TIUser
@@ -40,3 +43,37 @@ class WaiverForm(ModelForm):
     class Meta:
         model = Waiver
         fields = ['waiverDate', 'waiverName']
+
+class InspectionForm(ModelForm):
+    class Meta:
+        model = Inspection
+        fields = ['noWheelPlay', 'goodWheels', 'goodHubCaps', 'goodTires',
+                'goodTireTreadDepth', 'goodBreakPads', 'noLooseBodyPanels',
+                'goodNumbers', 'goodFloorMats', 'secureBTC', 'goodBreakPedal',
+                'noExcessPlayinSteering', 'goodSeat', 'goodSeatBelt', 'goodMountedCamera',
+                'goodBatteryandConnections', 'goodBatteryandConnectionsNotes',
+                'goodAirIntakeandSecure', 'goodAirIntakeandSecureNotes',
+                'goodThrottleCable', 'goodThrottleCableNotes',
+                'goodFluidCaps', 'goodFluidCapsNotes',
+                'noMajorLeaks', 'noMajorLeaksNotes',
+                'emptyTrunk', 'emptyTrunkNotes',
+                'functionalExhaust', 'functionalExhaustNotes',
+                'goodHelmet', 'isNoviceDriver'
+                ]
+
+class VehicleForm(ModelForm):
+    class Meta:
+        model = Vehicle
+        fields = ['VIN', 'vehicleYear', 'vehicleMake', 'vehicleModel']
+        widgets = {
+                'VIN': TextInput(attrs={'placeholder': 'Car VIN'}),
+                'vehicleYear': NumberInput(attrs={'placeholder': 'Year made', 'min': 1920, 'max': datetime.now().year + 1}),
+                'vehicleMake': TextInput(attrs={'placeholder': 'Vehicle Make'}),
+                'vehicleModel': TextInput(attrs={'placeholder': 'Vehicle Model'}),
+                }
+    def create(self, uuid):
+        if self.is_valid():
+            entry = Vehicle(VIN=self.cleaned_data['VIN'], vehicleYear=self.cleaned_data['vehicleYear'], vehicleMake = self.cleaned_data['vehicleMake'], vehicleModel=self.cleaned_data['vehicleModel'])
+            entry.UUID = utils.user_list[uuid].user
+            print(entry)
+            entry.save()
