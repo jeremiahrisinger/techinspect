@@ -17,10 +17,9 @@ def prune(user_list):
             del user_list[key]
 
 class ActiveUser():
-    def __init__(self, username):
+    def __init__(self, user):
         self.login_time = time.time()
-        self.username = username
-        self.uuid = uuid.uuid4().hex
+        self.user = user
 
 
 def login(email, pswd):
@@ -33,18 +32,26 @@ def login(email, pswd):
         #if the user exists in the db, check that the password matches
         if user.check_password(pswd):
             #add user to user_list so we know they're logged in within the system
-            user_list[user.username] = ActiveUser(user.username)
+            user_list[uuid.uuid4().hex] = ActiveUser(TIUser.objects.get(username=email))
+            print(f"Added user {user.username} to user_list")
             #prune the list every time someone logs in.
             prune(user_list)
             return True
     return False
 
+def get_user(uuid):
+    return TIUser.objects.get(username=user_list[uuid])
+
+def find_user_uuid(username):
+    for key in list(user_list):
+        if user_list[key].user.username == username:
+            return key
 def test_user_list_prune():
-    test = ActiveUser('test')
+    test = ActiveUser(TIUser.objects.get(username='jackmnitti@gmail.com'))
     test.login_time -= SIX_HOURS + 10
     print(user_list)
     print("Adding test user...")
-    user_list['test'] = test
+    user_list[uuid.uuid4()] = test
     print(user_list)
     prune(user_list)
     print("Pruning...")

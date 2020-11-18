@@ -13,7 +13,8 @@ def login_render(request):
             #IMPORTANT: TO ACCESS FORM DATA ALWAYS USE cleaned_data['name of field']
             try:
                 if utils.login(form.cleaned_data['username'], form.cleaned_data['password']):
-                    return HttpResponseRedirect('home/' + utils.user_list[form.cleaned_data['username']].uuid + '/') 
+                    return HttpResponseRedirect('home/' + utils.find_user_uuid(form.cleaned_data['username']) + '/') 
+                
                 else:
                     messages.error(request, "Login failed due to incorrect username/password")
             except ObjectDoesNotExist:
@@ -24,17 +25,30 @@ def login_render(request):
 
 
 def homepage_render(request, uuid):
-    print(uuid)
     return render(request, 'home/index.html', {'uuid': uuid})
 
 def profile_render(request, uuid):
     return render(request, 'profile/profile.html', {'uuid': uuid})
 
 def inspection_render(request, uuid):
-    return render(request, 'inspections/inspections.html', {'uuid': uuid})
+    if request.method == 'POST':
+        form = forms.InspectionForm(request.POST)
+        if form.is_valid():
+            pass
+    else:
+        form = forms.InspectionForm()
+    return render(request, 'inspections/inspections.html', {'inspection_form': form, 'uuid': uuid})
 
-def schedule_render(request, uuid):
-    return render(request, 'schedule/schedule.html', {'uuid': uuid})
+def cars_render(request, uuid):
+    if request.method == 'POST':
+        form = forms.VehicleForm(request.POST)
+        print(uuid)
+        if form.is_valid():
+            form.create(uuid)
+    else:
+        form = forms.VehicleForm()
+    return render(request, 'cars/cars.html', {'vehicle_form': form, 'uuid': uuid})
+
 def waiver_render(request, uuid):
     if request.method == 'POST':
         form = forms.WaiverForm(request.POST)
