@@ -151,9 +151,9 @@
 
 .inspect-item-text{
     width: fit-content;
-    padding: 10px;
+    text-align: left;
+    padding: 2px;
     margin: 0px;
-    word-wrap: normal;
 }
 
 .login-background{
