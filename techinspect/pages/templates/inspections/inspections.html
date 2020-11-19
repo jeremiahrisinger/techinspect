@@ -2,57 +2,57 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <link rel="stylesheet" type="text/css" href="{% static 'pages/homepage.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'pages/website.css' %}">
     <title>CCSCC</title>
     </head>
-    <body>
+    <body class="home-background">
       <h1 class="title">CHAMPAIGN COUNTY SPORTS CAR CLUB</h1>
-        <img src = "{% static 'Banner.png'  %}" id = "banner"></img>
-        <ul>
-          <li><a href="/home/{{uuid}}/">Home</a></li>
-          <li><a href="/inspections/{{uuid}}/" class="active">Inspections</a></li>
-          <li><a href="/waivers/{{uuid}}/">Waivers</a></li>
-          <li><a href="/profile/{{uuid}}/">Profile</a></li>
-          <li><a href="/schedule/{{uuid}}/">Schedule</a></li>
+        <ul class="nav-bar">
+          <li class="nav-bar-item"><a href="/home/{{uuid}}/">Home</a></li>
+          <li class="nav-bar-item"><a href="/inspections/{{uuid}}/" class="active">Inspections</a></li>
+          <li class="nav-bar-item"><a href="/waivers/{{uuid}}/">Waivers</a></li>
+          <li class="nav-bar-item"><a href="/profile/{{uuid}}/">Profile</a></li>
+          <li class="nav-bar-item"><a href="/cars/{{uuid}}/">Garage</a></li>
         </ul>
-          <div>
-            <p>
-              Vehicle Inspections
-            </p>
+          <div class="div-lvl1">
             {% if inspection_form %}
-            <p> Exterior </p>
-            <p class="inspection">No play in the wheel bearings: {{ inspection_form.noWheelPlay }}</p>
-            <p class="inspection">Wheels are tight and have no visible cracks: {{ inspection_form.goodWheels }}</p>
-            <p class="inspection">Hubcaps or center caps removed or firmly secured: {{ inspection_form.goodHubCaps }}</p>
-            <p class="inspection">Tires are in good condition: {{ inspection_form.goodTires }} </p>
-            <p class="inspection">Tire tread depth (as appropriate): {{ inspection_form.goodTireTreadDepth }}</p>
-            <p class="inspection">Brake pads/rotors in good condition: {{ inspection_form.goodBreakPads }}</p>
-            <p class="inspection">No loose body panels. {{ inspection_form.noLooseBodyPanels }}</p>
-            <p class="inspection">Numbers on & clearly visible on body: {{ inspection_form.goodNumbers }}</p>
-            
-            <br><br>
-            <p> Interior </p>
-            <p class="inspection">Floor mats and all other loose items removed from car: {{ inspection_form.goodFloorMats }}</p>
-            <p class="inspection">Brake, throttle, and clutch (if applicable) pedals secure: {{ inspection_form.secureBTC }}</p>
-            <p class="inspection">No excessive play in the steering: {{ inspection_form.goodBreakPedal }}</p>
-            <p class="inspection">No excessive play in the gear selector: {{ inspection_form.noExcessPlayinSteering }}</p>
-            <p class="inspection">Seat in functional order: {{ inspection_form.goodSeat }}</p>
-            <p class="inspection">Seat Belt proper for year of car and class: {{ inspection_form.goodSeatBelt }}</p>
-            <p class="inspection">Camera, phones, and other gear mounted to car: {{ inspection_form.goodMountedCamera }}</p>
-
-            <br><br>
-            <p> Under the Hood and Trunk </p>
-            <p class=inspection>Battery and connections secure: {{ inspection_form.goodBatteryandConnections }}</p>
-            <p class=inspection>Air intake or air box secure: {{ inspection_form.goodAirIntakeandSecure }}</p>
-            <p class=inspection>Throttle cable secure(if applicable): {{ inspection_form.goodThrottleCable }}</p>
-            <p class=inspection>All fluid caps secure: {{ inspection_form.goodFluidCaps }}</p>
-            <p class=inspection>No major leaks apparent: {{ inspection_form.noMajorLeaks }}</p>
-            <p class=inspection>Trunk is empty of items that move around: {{ inspection_form.emptyTrunk }}</p>
-            <p class=inspection>Function exhaust system: {{ inspection_form.functionalExhaust }}</p>
-
-            {% endif %}
-            <p class="bannerimg"></p>                                       
-
-            
+            <p class="title">
+              {{ inspection_form.inspectionID }} Inspection
+            </p>
+            <div class="div-lvl2">
+              <p class="div-head"> Exterior </p>
+              <p class="inspect-item-text">{{ inspection_form.noWheelPlay }}        No play in the wheel bearings</p>
+              <p class="inspect-item-text">{{ inspection_form.goodWheels }}        Wheels are tight and have no visible cracks</p>
+              <p class="inspect-item-text">{{ inspection_form.goodHubCaps }}        Hubcaps or center caps removed or firmly secured</p>
+              <p class="inspect-item-text">{{ inspection_form.goodTires }}        Tires are in good condition</p>
+              <p class="inspect-item-text">{{ inspection_form.goodTireTreadDepth }}        Tire tread depth (as appropriate)</p>
+              <p class="inspect-item-text">{{ inspection_form.goodBreakPads }}        Brake pads/rotors in good condition</p>
+              <p class="inspect-item-text">{{ inspection_form.noLooseBodyPanels }}        No loose body panels</p>
+              <p class="inspect-item-text">{{ inspection_form.goodNumbers }}        Numbers on & clearly visible on body</p>
+            </div>
+            <div class="div-lvl2">  
+              <p class="div-head"> Interior </p>
+              <p class="inspect-item-text">{{ inspection_form.goodFloorMats }} Floor mats and all other loose items removed from car</p>
+              <p class="inspect-item-text">{{ inspection_form.secureBTC }} Brake, throttle, and clutch (if applicable) pedals secure</p>
+              <p class="inspect-item-text">{{ inspection_form.goodBreakPedal }} No excessive play in the steering</p>
+              <p class="inspect-item-text">{{ inspection_form.noExcessPlayinSteering }} No excessive play in the gear selector</p>
+              <p class="inspect-item-text">{{ inspection_form.goodSeat }} Seat in functional order</p>
+              <p class="inspect-item-text">{{ inspection_form.goodSeatBelt }} Seat Belt proper for year of car and class</p>
+              <p class="inspect-item-text">{{ inspection_form.goodMountedCamera }} Camera, phones, and other gear mounted to car</p>
+            </div>  
+            <div class="div-lvl2">
+              <p class="div-head"> Under the Hood and Trunk </p>
+              <p class=inspect-item-text>{{ inspection_form.goodBatteryandConnections }} Battery and connections secure: </p>
+              <p class=inspect-item-text>{{ inspection_form.goodAirIntakeandSecure }} Air intake or air box secure: </p>
+              <p class=inspect-item-text>{{ inspection_form.goodThrottleCable }} Throttle cable secure(if applicable): </p>
+              <p class=inspect-item-text>{{ inspection_form.goodFluidCaps }} All fluid caps secure: </p>
+              <p class=inspect-item-text>{{ inspection_form.noMajorLeaks }} No major leaks apparent: </p>
+              <p class=inspect-item-text>{{ inspection_form.emptyTrunk }} Trunk is empty of items that move around: </p>
+              <p class=inspect-item-text>{{ inspection_form.functionalExhaust }} Function exhaust system: </p>
+              <p class=inspect-item-text>{{ inspection_form.functionalExhaustNotes }}   Function exhaust notes: </p>
+              {% endif %}
+            </div>
+            <input type="submit" value="submit inspection" class="button">
+        </div>                                    
     </body>
   </html>
