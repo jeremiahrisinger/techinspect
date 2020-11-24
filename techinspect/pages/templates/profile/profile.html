@@ -23,6 +23,15 @@
             <p>
               Profile
             </p>
+            {% if profile_form %}
+            {{profile_form.username}}
+            {{profile_form.email}}
+            {% endif %}
+            {% if password_form %}
+                {% for field in password_form %}
+                {{ field }}
+                {% endfor %}
+            {% endif %}
             <p class="bannerimg"></p>
            </div>
     </body>

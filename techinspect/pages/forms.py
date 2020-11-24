@@ -88,3 +88,13 @@ class ProfileForm(ModelForm):
         self.fields['username'].widget.attrs['readonly'] = True
         self.fields['email'].widget.attrs['readonly'] = True
         self.fields['image'].widget.attrs['readonly'] = True
+
+class PasswordChangeForm(forms.Form):
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Password'}))
+    confirm_pass = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Verify Password'}))
+    def verify_password(self):
+        passw = self.cleaned_data['password']
+        conf_pass = self.cleaned_data['confirm_pass']
+        if passw != conf_pass:
+            return False
+        return True

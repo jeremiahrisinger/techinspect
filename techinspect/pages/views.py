@@ -28,9 +28,20 @@ def homepage_render(request, uuid):
     return render(request, 'home/index.html', {'uuid': uuid})
 
 def profile_render(request, uuid):
+    if request.method == 'POST':
+        password_form = forms.PasswordChangeForm(request.POST)
+        if password_form.is_valid() and password_form.verify_password():
+            try:
+                user = utils.get_user(uuid)
+                user.set_password(password_form.cleaned_data['password'])
+            except Exception:
+                print("Probably couldn't find key or for some reason the user model was not findable")
+
+    else:
+        password_form = forms.PasswordChangeForm()
+
     form = forms.ProfileForm(instance=utils.get_user(uuid)) #Assumes user is logged in.
-    print(form)
-    return render(request, 'profile/profile.html', {'profile_form': form, 'uuid': uuid})
+    return render(request, 'profile/profile.html', {'profile_form': form, 'password_form': password_form, 'uuid': uuid})
 
 def inspection_render(request, uuid):
     if request.method == 'POST':
