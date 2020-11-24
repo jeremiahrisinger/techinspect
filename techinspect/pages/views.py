@@ -30,13 +30,16 @@ def homepage_render(request, uuid):
 def profile_render(request, uuid):
     if request.method == 'POST':
         password_form = forms.PasswordChangeForm(request.POST)
-        if password_form.is_valid() and password_form.verify_password():
+        if password_form.is_valid() and password_form.verify_old_password(uuid) and password_form.verify_new_password():
             try:
                 user = utils.get_user(uuid)
                 user.set_password(password_form.cleaned_data['password'])
+                user.save()
+                print(user)
             except Exception:
-                print("Probably couldn't find key or for some reason the user model was not findable")
-
+                print("Something went wrong :(")
+        else:
+            print("Checks failing for some reason")
     else:
         password_form = forms.PasswordChangeForm()
 

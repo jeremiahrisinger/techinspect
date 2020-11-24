@@ -90,9 +90,16 @@ class ProfileForm(ModelForm):
         self.fields['image'].widget.attrs['readonly'] = True
 
 class PasswordChangeForm(forms.Form):
-    password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Password'}))
-    confirm_pass = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Verify Password'}))
-    def verify_password(self):
+    old_password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Current Password'}))
+    old_confirm_pass = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Verify Current Password'}))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'New Password'}))
+    confirm_pass = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Verify New Password'}))
+    def verify_old_password(self, uuid):
+        user = utils.get_user(uuid)
+        if self.cleaned_data['old_password'] == self.cleaned_data['old_confirm_pass'] and user.check_password(self.cleaned_data['old_confirm_pass']):
+            return True
+        return False
+    def verify_new_password(self):
         passw = self.cleaned_data['password']
         conf_pass = self.cleaned_data['confirm_pass']
         if passw != conf_pass:

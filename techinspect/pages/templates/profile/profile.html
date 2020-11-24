@@ -27,11 +27,15 @@
             {{profile_form.username}}
             {{profile_form.email}}
             {% endif %}
+            <form method="POST">
+            {% csrf_token %}
             {% if password_form %}
                 {% for field in password_form %}
                 {{ field }}
                 {% endfor %}
             {% endif %}
+            <input type="submit" value="Change password" class="button">
+            </form>
             <p class="bannerimg"></p>
            </div>
     </body>
