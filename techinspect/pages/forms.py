@@ -77,6 +77,13 @@ class VehicleForm(ModelForm):
             entry.UUID = utils.user_list[uuid].user
             print(entry)
             entry.save()
+    def read_only(self):
+        self.fields['VIN'].widget.attrs['readonly'] = True
+        self.fields['vehicleYear'].widget.attrs['readonly'] = True
+        self.fields['vehicleMake'].widget.attrs['readonly'] = True
+        self.fields['vehicleModel'].widget.attrs['readonly'] = True
+
+
 
 
 class ProfileForm(ModelForm):

@@ -11,7 +11,8 @@ urlpatterns = [
         path('profile/<str:uuid>/', views.profile_render, name="Profile"),
         path('waivers/<str:uuid>/', views.waiver_render, name="Waivers"),
         path('inspections/<str:uuid>/', views.inspection_render, name="Inspections"),
-        path('cars/<str:uuid>/', views.cars_render, name="Your cars"),
+        path('add_a_car/<str:uuid>/', views.cars_render, name="Add a Car"),
+        path('garage/<str:uuid>/', views.garage_render, name="Your Garage"), 
         path('admin/', admin.site.urls),
 ]
 
