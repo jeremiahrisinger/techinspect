@@ -40,7 +40,7 @@ def login(email, pswd):
     return False
 
 def get_user(uuid):
-    return TIUser.objects.get(username=user_list[uuid])
+    return user_list[uuid].user
 
 def find_user_uuid(username):
     for key in list(user_list):

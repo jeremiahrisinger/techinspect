@@ -77,3 +77,14 @@ class VehicleForm(ModelForm):
             entry.UUID = utils.user_list[uuid].user
             print(entry)
             entry.save()
+
+
+class ProfileForm(ModelForm):
+    class Meta:
+        model = TIUser
+        fields = ['username', 'email', 'image']
+    def __init__(self, *args, **kwargs):
+        super(ProfileForm, self).__init__(*args, **kwargs)
+        self.fields['username'].widget.attrs['readonly'] = True
+        self.fields['email'].widget.attrs['readonly'] = True
+        self.fields['image'].widget.attrs['readonly'] = True

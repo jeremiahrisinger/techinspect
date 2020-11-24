@@ -28,7 +28,9 @@ def homepage_render(request, uuid):
     return render(request, 'home/index.html', {'uuid': uuid})
 
 def profile_render(request, uuid):
-    return render(request, 'profile/profile.html', {'uuid': uuid})
+    form = forms.ProfileForm(instance=utils.get_user(uuid)) #Assumes user is logged in.
+    print(form)
+    return render(request, 'profile/profile.html', {'profile_form': form, 'uuid': uuid})
 
 def inspection_render(request, uuid):
     if request.method == 'POST':
