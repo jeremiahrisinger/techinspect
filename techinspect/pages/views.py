@@ -5,6 +5,7 @@ from django.shortcuts import render
 from django.utils.html import mark_safe
 from pages import forms
 from pages import utils
+from pages.models import Vehicle
 
 def login_render(request):
     if request.method == 'POST':
@@ -28,9 +29,23 @@ def homepage_render(request, uuid):
     return render(request, 'home/index.html', {'uuid': uuid})
 
 def profile_render(request, uuid):
+    if request.method == 'POST':
+        password_form = forms.PasswordChangeForm(request.POST)
+        if password_form.is_valid() and password_form.verify_old_password(uuid) and password_form.verify_new_password():
+            try:
+                user = utils.get_user(uuid)
+                user.set_password(password_form.cleaned_data['password'])
+                user.save()
+                print(user)
+            except Exception:
+                print("Something went wrong :(")
+        else:
+            print("Checks failing for some reason")
+    else:
+        password_form = forms.PasswordChangeForm()
+
     form = forms.ProfileForm(instance=utils.get_user(uuid)) #Assumes user is logged in.
-    print(form)
-    return render(request, 'profile/profile.html', {'profile_form': form, 'uuid': uuid})
+    return render(request, 'profile/profile.html', {'profile_form': form, 'password_form': password_form, 'uuid': uuid})
 
 def inspection_render(request, uuid):
     if request.method == 'POST':
@@ -40,6 +55,11 @@ def inspection_render(request, uuid):
     else:
         form = forms.InspectionForm()
     return render(request, 'inspections/inspections.html', {'inspection_form': form, 'uuid': uuid})
+
+
+def garage_render(request, uuid):
+    cars = Vehicle.objects.filter(UUID=utils.get_user(uuid))
+    return render(request, 'cars/garage.html', {'garage_cars': cars})
 
 def cars_render(request, uuid):
     if request.method == 'POST':

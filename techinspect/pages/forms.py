@@ -77,6 +77,13 @@ class VehicleForm(ModelForm):
             entry.UUID = utils.user_list[uuid].user
             print(entry)
             entry.save()
+    def read_only(self):
+        self.fields['VIN'].widget.attrs['readonly'] = True
+        self.fields['vehicleYear'].widget.attrs['readonly'] = True
+        self.fields['vehicleMake'].widget.attrs['readonly'] = True
+        self.fields['vehicleModel'].widget.attrs['readonly'] = True
+
+
 
 
 class ProfileForm(ModelForm):
@@ -88,3 +95,20 @@ class ProfileForm(ModelForm):
         self.fields['username'].widget.attrs['readonly'] = True
         self.fields['email'].widget.attrs['readonly'] = True
         self.fields['image'].widget.attrs['readonly'] = True
+
+class PasswordChangeForm(forms.Form):
+    old_password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Current Password'}))
+    old_confirm_pass = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Verify Current Password'}))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'New Password'}))
+    confirm_pass = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Verify New Password'}))
+    def verify_old_password(self, uuid):
+        user = utils.get_user(uuid)
+        if self.cleaned_data['old_password'] == self.cleaned_data['old_confirm_pass'] and user.check_password(self.cleaned_data['old_confirm_pass']):
+            return True
+        return False
+    def verify_new_password(self):
+        passw = self.cleaned_data['password']
+        conf_pass = self.cleaned_data['confirm_pass']
+        if passw != conf_pass:
+            return False
+        return True

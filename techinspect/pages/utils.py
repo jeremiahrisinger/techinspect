@@ -35,7 +35,6 @@ def login(email, pswd):
             user_list[uuid.uuid4().hex] = ActiveUser(TIUser.objects.get(username=email))
             print(f"Added user {user.username} to user_list")
             #prune the list every time someone logs in.
-            prune(user_list)
             return True
     return False
 

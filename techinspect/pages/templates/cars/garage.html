@@ -18,13 +18,6 @@
           <li class="nav-bar-item"><a href="/cars/{{uuid}}/" class="active">Garage</a></li>
         </ul>
         <div class="div-lvl1">
-          <form method="POST">
-              {% csrf_token %}
-              {% for field in vehicle_form %}
-              <p> {{field}} </p>
-              {% endfor %}
-              <input type="submit" value="Submit" class="button">
-          </form>
           {% if garage_cars %}
           {% for car in garage_cars %}
             {{ car.VIN }}
