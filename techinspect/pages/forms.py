@@ -26,11 +26,10 @@ class SignupForm(forms.Form):
         if self.verify_password():
             entry = TIUser.objects.create_user(self.cleaned_data['username'], email=self.cleaned_data['email'], password=self.cleaned_data['password'])
             #user_image = Image(image=self.cleaned_data['image'])
-            #user_image.save()
             #key = user_image.imageID
-            #entry.image = user_image
+            entry.image = self.cleaned_data['image']
             entry.save()
-            return True and TIUser.objects.get(username=entry.username)# and Image.objects.get(pk=key)
+            return True and TIUser.objects.get(username=entry.username)
         return False
          
 
@@ -43,11 +42,25 @@ class WaiverForm(ModelForm):
     class Meta:
         model = Waiver
         fields = ['waiverDate', 'waiverName']
+    #TODO maybe utilize first/last name in account creation so we can compare against the user input?
+    def create(self, uuid):
+        try:
+            user = utils.get_user(uuid)
+            if self.is_valid():
+                waiver = Waiver(waiverDate=self.cleaned_data['waiverDate'], waiverName=self.cleaned_data['waiverName'])
+                waiver.UUID = user
+                waiver.save()
+            else:
+                #LOGGING?
+                print("Creating the form failed")
+        except Exception:
+            print("Failed to find user")
+
 
 class InspectionForm(ModelForm):
     class Meta:
         model = Inspection
-        fields = ['noWheelPlay', 'goodWheels', 'goodHubCaps', 'goodTires',
+        fields = ['UserVehicle','noWheelPlay', 'goodWheels', 'goodHubCaps', 'goodTires',
                 'goodTireTreadDepth', 'goodBreakPads', 'noLooseBodyPanels',
                 'goodNumbers', 'goodFloorMats', 'secureBTC', 'goodBreakPedal',
                 'noExcessPlayinSteering', 'goodSeat', 'goodSeatBelt', 'goodMountedCamera',
@@ -61,11 +74,27 @@ class InspectionForm(ModelForm):
                 'goodHelmet', 'isNoviceDriver'
                 ]
 
+    def __init__(self, uuid, *args, **kwargs):
+        super(InspectionForm, self).__init__(*args, **kwargs)
+        #Must set the queryset(aka the list of values to be shown) for UserVehicle to the actual cars of the user
+        self.fields['UserVehicle'].queryset = Vehicle.objects.filter(UUID=utils.get_user(uuid))
+        #TODO Remove any undesireable entries(that already have up to date inspections)
+        #for entry in self.fields['UserVehicle'].queryset
+            #if entry.inspectionID
+            #somehow remove the value from the queryset
+    def create(self):
+        try:
+            if self.is_valid():
+                self.save()
+        except Exception:
+            print("Something didn't work in InspectionForm.create(); bad save?")
+
 class VehicleForm(ModelForm):
     class Meta:
         model = Vehicle
-        fields = ['VIN', 'vehicleYear', 'vehicleMake', 'vehicleModel']
+        fields = ['name','VIN', 'vehicleYear', 'vehicleMake', 'vehicleModel']
         widgets = {
+                'name': TextInput(attrs={'placeholder': 'Car nickname'}),
                 'VIN': TextInput(attrs={'placeholder': 'Car VIN'}),
                 'vehicleYear': NumberInput(attrs={'placeholder': 'Year made', 'min': 1920, 'max': datetime.now().year + 1}),
                 'vehicleMake': TextInput(attrs={'placeholder': 'Vehicle Make'}),
