@@ -15,10 +15,13 @@
           <li class="nav-bar-item"><a href="/cars/{{uuid}}/">Garage</a></li>
         </ul>
           <div class="div-lvl1">
+              <form method="POST">
+                  {% csrf_token %}
             {% if inspection_form %}
             <p class="title">
               {{ inspection_form.inspectionID }} Inspection
             </p>
+            <p> {{inspection_form.UserVehicle }} </p>
             <div class="div-lvl2">
               <p class="div-head"> Exterior </p>
               <p class="inspect-item-text">{{ inspection_form.noWheelPlay }}        No play in the wheel bearings</p>
@@ -42,17 +45,24 @@
             </div>  
             <div class="div-lvl2">
               <p class="div-head"> Under the Hood and Trunk </p>
-              <p class=inspect-item-text>{{ inspection_form.goodBatteryandConnections }} Battery and connections secure: </p>
-              <p class=inspect-item-text>{{ inspection_form.goodAirIntakeandSecure }} Air intake or air box secure: </p>
-              <p class=inspect-item-text>{{ inspection_form.goodThrottleCable }} Throttle cable secure(if applicable): </p>
-              <p class=inspect-item-text>{{ inspection_form.goodFluidCaps }} All fluid caps secure: </p>
-              <p class=inspect-item-text>{{ inspection_form.noMajorLeaks }} No major leaks apparent: </p>
-              <p class=inspect-item-text>{{ inspection_form.emptyTrunk }} Trunk is empty of items that move around: </p>
-              <p class=inspect-item-text>{{ inspection_form.functionalExhaust }} Function exhaust system: </p>
-              <p class=inspect-item-text>{{ inspection_form.functionalExhaustNotes }}   Function exhaust notes: </p>
-              {% endif %}
+              <p class=inspect-item-text>{{ inspection_form.goodBatteryandConnections }} Battery and connections secure</p>
+              <p class=inspect-item-text>{{ inspection_form.goodBatteryandConnectionsNotes }} Battery and connections secure</p>
+              <p class=inspect-item-text>{{ inspection_form.goodAirIntakeandSecure }} Air intake or air box secure</p>
+              <p class=inspect-item-text>{{ inspection_form.goodAirIntakeandSecureNotes }} Air intake or air box secure</p>
+              <p class=inspect-item-text>{{ inspection_form.goodThrottleCable }} Throttle cable secure(if applicable)</p>
+              <p class=inspect-item-text>{{ inspection_form.goodThrottleCableNotes }} Throttle cable secure(if applicable)</p>
+              <p class=inspect-item-text>{{ inspection_form.goodFluidCaps }} All fluid caps secure</p>
+              <p class=inspect-item-text>{{ inspection_form.goodFluidCapsNotes }} All fluid caps secure</p>
+              <p class=inspect-item-text>{{ inspection_form.noMajorLeaks }} No major leaks apparent</p>
+              <p class=inspect-item-text>{{ inspection_form.noMajorLeaksNotes }} No major leaks apparent</p>
+              <p class=inspect-item-text>{{ inspection_form.emptyTrunk }} Trunk is empty of items that move around</p>
+              <p class=inspect-item-text>{{ inspection_form.emptyTrunkNotes }} Trunk is empty of items that move around</p>
+              <p class=inspect-item-text>{{ inspection_form.functionalExhaust }} Function exhaust system</p>
+              <p class=inspect-item-text>{{ inspection_form.functionalExhaustNotes }}   Function exhaust notes</p>
             </div>
             <input type="submit" value="submit inspection" class="button">
+              </form>
+              {% endif %}
         </div>                                    
     </body>
   </html>
