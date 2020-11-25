@@ -51,9 +51,13 @@ def inspection_render(request, uuid):
     if request.method == 'POST':
         form = forms.InspectionForm(request.POST)
         if form.is_valid():
-            pass
+            print("Getting here")
+            form.create()
+            form = forms.InspectionForm(uuid)
+        else:
+            print("Form failed for some reason")
     else:
-        form = forms.InspectionForm()
+        form = forms.InspectionForm(uuid)
     return render(request, 'inspections/inspections.html', {'inspection_form': form, 'uuid': uuid})
 
 
@@ -75,8 +79,8 @@ def waiver_render(request, uuid):
     if request.method == 'POST':
         form = forms.WaiverForm(request.POST)
         if form.is_valid():
-            pass
-                #Add the waiver into the database for the given person.
+                #Add the waiver into the database for the given person
+            form.create(uuid)
     else:
         form = forms.WaiverForm()
     return render(request, 'waivers/waivers.html', {'waiver_form': form, 'uuid': uuid})
