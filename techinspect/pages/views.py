@@ -63,7 +63,7 @@ def inspection_render(request, uuid):
 
 def garage_render(request, uuid):
     cars = Vehicle.objects.filter(UUID=utils.get_user(uuid))
-    return render(request, 'cars/garage.html', {'garage_cars': cars})
+    return render(request, 'cars/garage.html', {'garage_cars': cars, 'uuid': uuid})
 
 def cars_render(request, uuid):
     if request.method == 'POST':
