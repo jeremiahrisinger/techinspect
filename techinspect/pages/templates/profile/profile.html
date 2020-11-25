@@ -27,6 +27,8 @@
             {% if profile_form %}
             {{profile_form.username}}
             {{profile_form.email}}
+            {{profile_form.first_name}}
+            {{profile_form.last_name}}
             {% endif %}
             <form method="POST">
             {% csrf_token %}
