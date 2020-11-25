@@ -20,11 +20,14 @@ class Vehicle(models.Model):
     vehicleYear = models.IntegerField(validators=[dbv.validate_car_year])
     vehicleMake = models.CharField(max_length=50) 
     vehicleModel = models.CharField(max_length=50) 
+    name = models.CharField(max_length=25, null=True)
     inspectionID = models.ForeignKey('Inspection', on_delete=models.CASCADE, null=True) #deleting a car deletes its inspection 
     vehicleAvatar = models.ImageField(upload_to='images', null=True)
     UUID = models.ForeignKey(TIUser, on_delete=models.DO_NOTHING) #Is this correct?
     def __str__(self):
-        return f"Vehicle info: {self.VIN}, {self.UUID}"
+        if not self.name:
+            return f"{self.vehicleYear} {self.vehicleMake} {self.vehicleModel}"
+        return f"{self.name}"
     
 
 
