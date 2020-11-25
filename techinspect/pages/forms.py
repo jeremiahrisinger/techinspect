@@ -13,21 +13,26 @@ class LoginForm(forms.Form):
 class SignupForm(forms.Form):
     username = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Username'}))
     email = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Email'}))
+    first_name= forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'First name'}))
+    last_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Last name'}))
     password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Password'}))
     confirm_pass = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Verify Password'}))
-    image = forms.ImageField(required=False)
+    #image = forms.ImageField(required=False)
     def verify_password(self):
-        passw = self.cleaned_data['password']
-        conf_pass = self.cleaned_data['confirm_pass']
-        if passw != conf_pass:
-            return False
-        return True
+        if self.is_valid():
+            passw = self.cleaned_data['password']
+            conf_pass = self.cleaned_data['confirm_pass']
+            if passw == conf_pass:
+                return True
+        return False
     def create_user(self):
-        if self.verify_password():
-            entry = TIUser.objects.create_user(self.cleaned_data['username'], email=self.cleaned_data['email'], password=self.cleaned_data['password'])
+        if self.verify_password() and self.is_valid():
+            entry = TIUser.objects.create_user(username=self.cleaned_data['username'], email=self.cleaned_data['email'], password=self.cleaned_data['password'])
             #user_image = Image(image=self.cleaned_data['image'])
             #key = user_image.imageID
-            entry.image = self.cleaned_data['image']
+            #entry.image = self.cleaned_data['image']
+            entry.first_name= self.cleaned_data['first_name']
+            entry.last_name = self.cleaned_data['last_name']
             entry.save()
             return True and TIUser.objects.get(username=entry.username)
         return False
@@ -118,12 +123,14 @@ class VehicleForm(ModelForm):
 class ProfileForm(ModelForm):
     class Meta:
         model = TIUser
-        fields = ['username', 'email', 'image']
+        fields = ['username', 'email', 'image', 'first_name', 'last_name']
     def __init__(self, *args, **kwargs):
         super(ProfileForm, self).__init__(*args, **kwargs)
         self.fields['username'].widget.attrs['readonly'] = True
         self.fields['email'].widget.attrs['readonly'] = True
         self.fields['image'].widget.attrs['readonly'] = True
+        self.fields['first_name'].widget.attrs['readonly'] = True
+        self.fields['last_name'].widget.attrs['readonly'] = True
 
 class PasswordChangeForm(forms.Form):
     old_password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Current Password'}))

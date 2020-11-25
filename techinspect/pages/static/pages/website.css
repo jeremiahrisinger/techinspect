@@ -264,7 +264,7 @@
     background-color: #f1f1f1;
 }
 
-#id_username, #id_password, #id_confirm_pass, #id_email{
+#id_username, #id_password, #id_confirm_pass, #id_email, #id_first_name, #id_last_name{
     height: 50px;
 
     min-width: 300px;
