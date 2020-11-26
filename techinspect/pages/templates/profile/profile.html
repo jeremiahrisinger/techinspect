@@ -2,34 +2,39 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <link rel="stylesheet" type="text/css" href="{% static 'pages/homepage.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'pages/website.css' %}">
     <title>CCSCC</title>
     </head>
-    <body>
-      <h1>CHAMPAIGN COUNTY SPORTS CAR CLUB</h1>
+    <body class="home-background">
+      <h1 class="title">CHAMPAIGN COUNTY SPORTS CAR CLUB</h1>
         <!--img src = "{% static 'Banner.png'  %}" id = "banner"></img-->
         <!-- Top navigation -->
-        <ul>
+        <ul class="nav-bar">
 
           <!-- Centered link -->
-          <li><a href="/home/{{uuid}}/" >Home</a></li>
-          <li><a href="/inspections/{{uuid}}/">Inspections</a></li>
-          <li><a href="/waivers/{{uuid}}/">Waivers</a></li>
-          <li><a href="/profile/{{uuid}}/" class="active">Profile</a></li>
-          <li><a href="/add_a_car/{{uuid}}/">Add a Car</a></li>
-          <li><a href="/garage/{{uuid}}/">Your Cars</a></li>
+          <li class="nav-bar-item"><a href="/home/{{uuid}}/" >Home</a></li>
+          <li class="nav-bar-item"><a href="/inspections/{{uuid}}/">Inspections</a></li>
+          <li class="nav-bar-item"><a href="/waivers/{{uuid}}/">Waivers</a></li>
+          <li class="nav-bar-item"><a href="/profile/{{uuid}}/" class="active">Profile</a></li>
+          <li class="nav-bar-item"><a href="/add_a_car/{{uuid}}/">Add a Car</a></li>
+          <li class="nav-bar-item"><a href="/garage/{{uuid}}/">Your Cars</a></li>
         </ul>
 
           <div class="div-lvl1">
-            <p>
+            <p class="div-head">
               Profile
             </p>
-            {% if profile_form %}
-            {{profile_form.username}}
-            {{profile_form.email}}
-            {{profile_form.first_name}}
-            {{profile_form.last_name}}
-            {% endif %}
+            <div class="div-lvl2">
+              
+              {% if profile_form %}
+              {{profile_form.username}}
+              {{profile_form.email}}
+              {{profile_form.first_name}}
+              {{profile_form.last_name}}
+              {% endif %}
+            </div>
+            <div class="div-lvl2">
+              <p class="div-head">Change password</p>
             <form method="POST">
             {% csrf_token %}
             {% if password_form %}
@@ -39,7 +44,7 @@
             {% endif %}
             <input type="submit" value="Change password" class="button">
             </form>
-            <p class="bannerimg"></p>
+            </div>
            </div>
     </body>
   </html>
