@@ -21,13 +21,13 @@
         <div class="div-lvl1">
           {% if garage_cars %}
           {% for car in garage_cars %}
+            {% if car.inspectionID and car.inspectionID.Verified == True %}
+            <p> Shit worked! </p>
+            {% endif %}
             {{ car.VIN }}
             {{ car.vehicleYear }}
             {{ car.vehicleMake }}
             {{ car.vehicleModel }}
-            {% if car.inspectionID %}
-                <p> Valid car inspection active </p>
-            {% endif %}
           {% endfor %} 
           {% endif %}
         </div>
