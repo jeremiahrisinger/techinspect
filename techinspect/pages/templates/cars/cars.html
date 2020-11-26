@@ -19,14 +19,18 @@
           <li class="nav-bar-item"><a href="/garage/{{uuid}}/">Your Cars</a></li>
         </ul>
         <div class="div-lvl1">
-          <form method="POST">
-              {% csrf_token %}
-              {% for field in vehicle_form %}
-              <p> {{field}} </p>
-              {% endfor %}
-              <input type="submit" value="Submit" class="button">
-          </form>
-          {% if garage_cars %}
+          <div class="div-lvl2">
+            <p class="div-head"> + Add a car </p>
+            <form method="POST">
+                {% csrf_token %}
+                {% for field in vehicle_form %}
+                  <p> {{field}} </p>
+                {% endfor %}
+                <input type="submit" value="Submit" class="button-small">
+            </form>
+          </div>
+        </div>
+         <!-- {% if garage_cars %}
           {% for car in garage_cars %}
             {{ car.VIN }}
             {{ car.vehicleYear }}
@@ -36,7 +40,7 @@
                 <p> Valid car inspection active </p>
             {% endif %}
           {% endfor %} 
-          {% endif %}
+          {% endif %}-->
         </div>
     </body>
   </html>
