@@ -78,11 +78,26 @@ class InspectionForm(ModelForm):
                 'functionalExhaust', 'functionalExhaustNotes',
                 'goodHelmet', 'isNoviceDriver'
                 ]
-
+        widgets = {
+                'goodBatteryandConnectionsNotes': TextInput(attrs={'placeholder': 'Notes'}),
+                'goodAirIntakeandSecureNotes': TextInput(attrs={'placeholder': 'Notes'}),
+                'goodThrottleCableNotes': TextInput(attrs={'placeholder': 'Notes'}),
+                'goodFluidCapsNotes': TextInput(attrs={'placeholder': 'Notes'}),
+                'noMajorLeaksNotes': TextInput(attrs={'placeholder': 'Notes'}),
+                'emptyTrunkNotes': TextInput(attrs={'placeholder': 'Notes'}),
+                'functionalExhaustNotes': TextInput(attrs={'placeholder': 'Notes'}),
+                }
     def __init__(self, uuid, *args, **kwargs):
         super(InspectionForm, self).__init__(*args, **kwargs)
         #Must set the queryset(aka the list of values to be shown) for UserVehicle to the actual cars of the user
         self.fields['UserVehicle'].queryset = Vehicle.objects.filter(UUID=utils.get_user(uuid))
+        self.fields['goodBatteryandConnectionsNotes'].required = False
+        self.fields['goodAirIntakeandSecureNotes'].required = False
+        self.fields['goodThrottleCableNotes'].required = False
+        self.fields['goodFluidCapsNotes'].required = False
+        self.fields['noMajorLeaksNotes'].required = False
+        self.fields['emptyTrunkNotes'].required = False
+        self.fields['functionalExhaustNotes'].required = False
         #TODO Remove any undesireable entries(that already have up to date inspections)
         #for entry in self.fields['UserVehicle'].queryset
             #if entry.inspectionID
@@ -90,9 +105,13 @@ class InspectionForm(ModelForm):
     def create(self):
         try:
             if self.is_valid():
-                self.save()
+                inspection = self.save(commit=False)
+                inspection.UserVehicle.inspectionID = inspection
+                inspection.save()
+                inspection.UserVehicle.save()
         except Exception:
             print("Something didn't work in InspectionForm.create(); bad save?")
+        return None
 
 class VehicleForm(ModelForm):
     class Meta:
