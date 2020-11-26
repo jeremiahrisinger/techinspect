@@ -15,19 +15,24 @@
           <li class="nav-bar-item"><a href="/inspections/{{uuid}}/">Inspections</a></li>
           <li class="nav-bar-item"><a href="/waivers/{{uuid}}/">Waivers</a></li>
           <li class="nav-bar-item"><a href="/profile/{{uuid}}/">Profile</a></li>
-          <li class="nav-bar-item"><a href="/add_a_car/{{uuid}}/">Add a Car</a></li>
+          <li class="nav-bar-item"><a href="/add_a_car/{{uuid}}/">Add Car</a></li>
           <li class="nav-bar-item"><a href="/garage/{{uuid}}/" class="active">Your Cars</a></li>
         </ul>
         <div class="div-lvl1">
           {% if garage_cars %}
           {% for car in garage_cars %}
-            {% if car.inspectionID and car.inspectionID.Verified == True %}
-            <p> Shit worked! </p>
-            {% endif %}
+          <div class="div-lvl2">
+            
+            <p class="div-head">{{car.name}}</p>
             {{ car.VIN }}
             {{ car.vehicleYear }}
             {{ car.vehicleMake }}
             {{ car.vehicleModel }}
+            {{ car.vehicleAvatar}}
+            {% if car.inspectionID and car.inspectionID.Verified == True %}
+            <p> {{ car.name }} is inspected and ready to race!</p>
+            {% endif %}
+          </div>
           {% endfor %} 
           {% endif %}
         </div>

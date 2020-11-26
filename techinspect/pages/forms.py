@@ -126,7 +126,7 @@ class VehicleForm(ModelForm):
                 }
     def create(self, uuid):
         if self.is_valid():
-            entry = Vehicle(VIN=self.cleaned_data['VIN'], vehicleYear=self.cleaned_data['vehicleYear'], vehicleMake = self.cleaned_data['vehicleMake'], vehicleModel=self.cleaned_data['vehicleModel'])
+            entry = Vehicle(name=self.cleaned_data['name'], VIN=self.cleaned_data['VIN'], vehicleYear=self.cleaned_data['vehicleYear'], vehicleMake = self.cleaned_data['vehicleMake'], vehicleModel=self.cleaned_data['vehicleModel'])
             entry.UUID = utils.user_list[uuid].user
             print(entry)
             entry.save()

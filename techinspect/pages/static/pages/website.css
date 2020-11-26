@@ -211,19 +211,18 @@
     list-style: none; 
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
+    flex-wrap: nowrap;
+    justify-content: left;
     height: fit-content;
     background-color:red;
 }
 
 .nav-bar-item a{
     flex-basis: auto;
-    flex-basis: content;
-    width: 12.3vw;
+    width: fit-content;
     display: block;
     color: #000;
-    padding: 3vh 2vw;
+    padding: 3vh 0vw;
     text-decoration: none;
     text-align: center;
     background-color: none
