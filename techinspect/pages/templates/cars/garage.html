@@ -21,9 +21,9 @@
         <div class="div-lvl1">
           {% if garage_cars %}
           {% for car in garage_cars %}
-            {% if car.inspectionID and car.inspectionID.Verified == True %}
+          {% if car.inspectionID and car.inspectionID.Verified == True  and today and car.inspectionID.inspectionDateEnd < today %}
             <p> Shit worked! </p>
-            {% endif %}
+           {% endif %}
             {{ car.VIN }}
             {{ car.vehicleYear }}
             {{ car.vehicleMake }}

@@ -6,6 +6,7 @@ from django.utils.html import mark_safe
 from pages import forms
 from pages import utils
 from pages.models import Vehicle
+import datetime
 
 def login_render(request):
     if request.method == 'POST':
@@ -63,7 +64,8 @@ def inspection_render(request, uuid):
 
 def garage_render(request, uuid):
     cars = Vehicle.objects.filter(UUID=utils.get_user(uuid))
-    return render(request, 'cars/garage.html', {'garage_cars': cars, 'uuid': uuid})
+    today = datetime.date.today()
+    return render(request, 'cars/garage.html', {'garage_cars': cars, 'uuid': uuid, 'today': today})
 
 def cars_render(request, uuid):
     if request.method == 'POST':

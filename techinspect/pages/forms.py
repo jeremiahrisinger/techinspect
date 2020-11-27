@@ -2,7 +2,7 @@ from django import forms
 from django.forms import ModelForm
 from pages.models import Image, TIUser, Waiver, Vehicle, Inspection
 from django.forms.widgets import TextInput, NumberInput
-from datetime import datetime
+import datetime
 from pages import utils
 
 class LoginForm(forms.Form):
@@ -120,7 +120,7 @@ class VehicleForm(ModelForm):
         widgets = {
                 'name': TextInput(attrs={'placeholder': 'Car nickname'}),
                 'VIN': TextInput(attrs={'placeholder': 'Car VIN'}),
-                'vehicleYear': NumberInput(attrs={'placeholder': 'Year made', 'min': 1920, 'max': datetime.now().year + 1}),
+                'vehicleYear': NumberInput(attrs={'placeholder': 'Year made', 'min': 1920, 'max': datetime.datetime.now().year + 1}),
                 'vehicleMake': TextInput(attrs={'placeholder': 'Vehicle Make'}),
                 'vehicleModel': TextInput(attrs={'placeholder': 'Vehicle Model'}),
                 }
