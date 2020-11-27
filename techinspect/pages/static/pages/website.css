@@ -83,8 +83,8 @@
     padding: 5vh 5vw;
     width: 90vw;
     min-height: 250px;
-    min-width: 150px;
-    max-width: 500px;
+    min-width: 300px;
+    max-width: 600px;
     text-align: center;
 }
 
@@ -211,19 +211,18 @@
     list-style: none; 
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
+    flex-wrap: nowrap;
+    justify-content: left;
     height: fit-content;
     background-color:red;
 }
 
 .nav-bar-item a{
     flex-basis: auto;
-    flex-basis: content;
-    width: 15.5vw;
+    width: fit-content;
     display: block;
     color: #000;
-    padding: 3vh 2vw;
+    padding: 3vh 0vw;
     text-decoration: none;
     text-align: center;
     background-color: none
@@ -239,6 +238,8 @@
 
 .nav-bar-item a:hover:not(.active){
     background-color: rgb(249, 93, 32);
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
 }
 
 .profile{
@@ -256,6 +257,7 @@
     padding: 20px
 }
 
+
 #content {
     padding: 0 18px;
     max-height: 0;
@@ -264,7 +266,23 @@
     background-color: #f1f1f1;
 }
 
-#id_username, #id_password, #id_confirm_pass, #id_email, #id_first_name, #id_last_name{
+#id_username, #id_password, #id_confirm_pass, #id_old_password, #id_old_confirm_pass, #id_email, #id_first_name, #id_last_name{
+    height: 50px;
+
+    min-width: 300px;
+    width: 40%;
+    max-width: 500px;
+    margin: 1vh;
+    background-color: whitesmoke;
+    border: none;
+    border-radius: 0;
+    font-size: 16px;
+    font-style: italic;
+    text-align: left;
+    padding: 12.5px 25px;
+}
+
+p #id_username,p #id_password,p #id_confirm_pass,p #id_email,p #id_first_name,p #id_last_name{
     height: 50px;
 
     min-width: 300px;
@@ -278,6 +296,28 @@
     font-style: italic;
     text-align: left;
     padding: 12.5px 25px;
+}
+
+input[type=checkbox]{
+    display: inline-block;
+    height: 30px;
+    width: 30px;
+    background-color: red;
+}
+
+input[type=text]{
+    height: 30px;
+    width: 40%;
+    border: none;
+    background-color: whitesmoke;
+    flex-direction: row;
+    flex-basis: content;
+    justify-content: right;
+}
+#contains-notes{
+    width: 100%;
+    display: flexbox;
+    justify-content: space-evenly;
 }
 #waiver {
     max-width: 85%;

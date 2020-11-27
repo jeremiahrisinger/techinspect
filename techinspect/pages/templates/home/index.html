@@ -2,22 +2,23 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <link rel="stylesheet" type="text/css" href="{% static 'pages/homepage.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'pages/website.css' %}">
     <title>CCSCC</title>
     </head>
-    <body>
-      <h1>CHAMPAIGN COUNTY SPORTS CAR CLUB</h1>
-        <ul>
-          <li><a href="/home/{{ uuid }}/" class="active">Home</a></li>
-          <li><a href="/inspections/{{ uuid }}/">Inspections</a></li>
-          <li><a href="/waivers/{{ uuid }}/">Waivers</a></li>
-          <li><a href="/profile/{{ uuid }}/">Profile</a></li>
-          <li><a href="/add_a_car/{{ uuid }}/">Add a car</a></li>
-          <li><a href="/garage/{{ uuid }}/">Your Cars</a></li>
+    <body class="home-background">
+      <h1 class="title">CHAMPAIGN COUNTY SPORTS CAR CLUB</h1>
+        <ul class="nav-bar">
+          <li class="nav-bar-item"><a href="/home/{{ uuid }}/" class="active">Home</a></li>
+          <li class="nav-bar-item"><a href="/inspections/{{ uuid }}/">Inspections</a></li>
+          <li class="nav-bar-item"><a href="/waivers/{{ uuid }}/">Waivers</a></li>
+          <li class="nav-bar-item"><a href="/profile/{{ uuid }}/">Profile</a></li>
+          <li class="nav-bar-item"><a href="/add_a_car/{{ uuid }}/">Add Car</a></li>
+          <li class="nav-bar-item"><a href="/garage/{{ uuid }}/">Your Cars</a></li>
         </ul>
-          <div>
+          <div class="div-lvl1">
+            <p class="div-head">Champaign County Sports Car Club</p> 
             <p>
-              Champaign County Sports Car Club is a car club for drivers and car
+              A car club for drivers and car
               enthusiasts.  Club meetings on the first Wed. of the month at 7:30pm
               at Hickory River Smokehouse, 1706 N Cunningham Ave, Urbana.
             </p>
