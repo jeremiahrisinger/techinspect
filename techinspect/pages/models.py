@@ -12,6 +12,7 @@ class TIUser(AbstractUser):
     VIN = models.ForeignKey('Vehicle', on_delete=models.CASCADE, null=True) #Have to link by name of class since it is created later on in file
     waiverID = models.ForeignKey('Waiver', on_delete=models.CASCADE, null=True) #same here
     image = models.ImageField(upload_to='images/', null=True)
+    isTI = models.BooleanField(default=False)
     def __str__(self):
         return self.username + " " + self.password #TODO remove this after project complete
 
