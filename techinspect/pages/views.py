@@ -46,7 +46,8 @@ def profile_render(request, uuid):
         password_form = forms.PasswordChangeForm()
 
     form = forms.ProfileForm(instance=utils.get_user(uuid)) #Assumes user is logged in.
-    return render(request, 'profile/profile.html', {'profile_form': form, 'password_form': password_form, 'uuid': uuid})
+    profile_image = utils.get_user(uuid).image
+    return render(request, 'profile/profile.html', {'profile_image': profile_image, 'profile_form': form, 'password_form': password_form, 'uuid': uuid})
 
 def inspection_render(request, uuid):
     if request.method == 'POST':
@@ -69,7 +70,7 @@ def garage_render(request, uuid):
 
 def cars_render(request, uuid):
     if request.method == 'POST':
-        form = forms.VehicleForm(request.POST)
+        form = forms.VehicleForm(request.POST, request.FILES)
         print(uuid)
         if form.is_valid():
             form.create(uuid)

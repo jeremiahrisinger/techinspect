@@ -31,7 +31,8 @@
             {{ car.vehicleYear }}
             {{ car.vehicleMake }}
             {{ car.vehicleModel }}
-            {{ car.vehicleAvatar}}
+            {{ car.vehicleType }}
+            <img src="{{ car.vehicleAvatar.url }}"/>
             {% if car.inspectionID and car.inspectionID.Verified == True %}
             <p> {{ car.name }} is inspected and ready to race!</p>
             {% endif %}
