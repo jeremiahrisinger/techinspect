@@ -103,7 +103,7 @@ class Waiver(models.Model):
     #TODO: Is defining an ID here necessary or should we just use the one provided by Django?
     waiverID = models.AutoField(primary_key=True) 
     waiverDate = models.DateField(default=date.today) 
-    waiverName = models.CharField(max_length=100) 
+    waiverName = models.CharField(default="Full name", max_length=100) 
     UUID = models.ForeignKey(TIUser, on_delete=DO_NOTHING) 
 
 class Image(models.Model):

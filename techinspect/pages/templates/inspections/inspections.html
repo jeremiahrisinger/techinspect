@@ -19,7 +19,7 @@
               <form method="POST">
                   {% csrf_token %}
             {% if inspection_form %}
-            <p class="title">
+            <p class="div-head">
               {{ inspection_form.inspectionID }} Inspection
             </p>
             <p> {{inspection_form.UserVehicle }} </p>

@@ -36,6 +36,14 @@
               {% endif %}
             </div>
             <div class="div-lvl2">
+              <p class="div-head">Your Waivers</p>
+            {% if waiver_form %}
+              <p>Your waiver is vaild!</p>
+            {% else %} 
+              <p>You do not have a valid waiver!</p>
+            {% endif %}
+            </div>
+            <div class="div-lvl2">
               <p class="div-head">Change password</p>
             <form method="POST">
             {% csrf_token %}
