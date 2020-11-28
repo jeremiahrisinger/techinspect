@@ -66,7 +66,15 @@ def inspection_render(request, uuid):
 def garage_render(request, uuid):
     cars = Vehicle.objects.filter(UUID=utils.get_user(uuid))
     today = datetime.date.today()
-    return render(request, 'cars/garage.html', {'garage_cars': cars, 'uuid': uuid, 'today': today})
+    yearDiffs = []
+    for i in range(0, len(cars)):
+        if(cars[i].inspectionID):
+            yearDiffs.append(today.year - cars[i].inspectionID.inspectionDate.year)
+        else:
+            yearDiffs.append(5) #Basically just needs to be a number that fails the check
+       
+    myZips = zip(cars, yearDiffs)
+    return render(request, 'cars/garage.html', {'garage_cars': cars, 'myZips': myZips, 'uuid': uuid})
 
 def cars_render(request, uuid):
     if request.method == 'POST':

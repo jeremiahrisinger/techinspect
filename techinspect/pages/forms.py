@@ -74,7 +74,8 @@ class InspectionForm(ModelForm):
                 'noMajorLeaks', 'noMajorLeaksNotes',
                 'emptyTrunk', 'emptyTrunkNotes',
                 'functionalExhaust', 'functionalExhaustNotes',
-                'goodHelmet', 'isNoviceDriver'
+                'goodHelmet', 'isNoviceDriver',
+                'inspectionID'
                 ]
         widgets = {
                 'goodBatteryandConnectionsNotes': TextInput(attrs={'placeholder': 'Notes'}),
@@ -85,6 +86,9 @@ class InspectionForm(ModelForm):
                 'emptyTrunkNotes': TextInput(attrs={'placeholder': 'Notes'}),
                 'functionalExhaustNotes': TextInput(attrs={'placeholder': 'Notes'}),
                 }
+    def fucking_print_inspectionID(self):
+        print("Printing inspectionID_________________-")
+        print(self.fields['inspectionID'])
     def __init__(self, uuid, *args, **kwargs):
         super(InspectionForm, self).__init__(*args, **kwargs)
         #Must set the queryset(aka the list of values to be shown) for UserVehicle to the actual cars of the user
