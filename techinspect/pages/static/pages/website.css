@@ -257,6 +257,10 @@
     background-color: whitesmoke;
     padding: 20px
 }
+.waiver-form{
+    margin: 0%;
+    text-align: center;
+}
 
 
 #content {
@@ -320,11 +324,15 @@ input[type=text]{
     display: flexbox;
     justify-content: space-evenly;
 }
+#id_waiverDate, #id_waiverName{
+
+    background-color: lightgray;
+}
 #waiver {
     max-width: 85%;
     text-align: left;
     border: 1px whitesmoke solid;
-
+    text-indent: 4em;
     border-radius:10px;
 
 }

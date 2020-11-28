@@ -11,18 +11,33 @@ from django.db.models import *
 class TIUser(AbstractUser): 
     VIN = models.ForeignKey('Vehicle', on_delete=models.CASCADE, null=True) #Have to link by name of class since it is created later on in file
     waiverID = models.ForeignKey('Waiver', on_delete=models.CASCADE, null=True) #same here
-    image = models.ImageField(upload_to='images', null=True)
+    image = models.ImageField(upload_to='images/', null=True)
     def __str__(self):
         return self.username + " " + self.password #TODO remove this after project complete
 
 class Vehicle(models.Model): 
-    VIN = models.CharField(max_length=17, primary_key=True) 
+    vehicleTypeChoices = (
+            ('Ineligible', 'Ineligible'),
+            ('A Street', 'A Street'),
+            ('B Street', 'B Street'),
+            ('C Street', 'C Street'),
+            ('D Street', 'D Street'),
+            ('E Street', 'E Street'),
+            ('F Street', 'F Street'),
+            ('G Street', 'G Street'),
+            ('H Street', 'H Street'),
+            ('Super Street', 'Super Street'),
+            )
+
+
+    VIN = models.CharField(max_length=17, primary_key=True)
+    vehicleType = models.CharField(max_length=12, choices=vehicleTypeChoices, default='IN') 
     vehicleYear = models.IntegerField(validators=[dbv.validate_car_year])
     vehicleMake = models.CharField(max_length=50) 
     vehicleModel = models.CharField(max_length=50) 
     name = models.CharField(max_length=25, null=True)
     inspectionID = models.ForeignKey('Inspection', on_delete=models.CASCADE, null=True) #deleting a car deletes its inspection 
-    vehicleAvatar = models.ImageField(upload_to='images', null=True)
+    vehicleAvatar = models.ImageField(upload_to='images/', null=True)
     UUID = models.ForeignKey(TIUser, on_delete=models.DO_NOTHING) #Is this correct?
     def __str__(self):
         if not self.name:
@@ -84,7 +99,7 @@ class Waiver(models.Model):
     #TODO: Is defining an ID here necessary or should we just use the one provided by Django?
     waiverID = models.AutoField(primary_key=True) 
     waiverDate = models.DateField(default=date.today) 
-    waiverName = models.CharField(max_length=100) 
+    waiverName = models.CharField(default="Full name", max_length=100) 
     UUID = models.ForeignKey(TIUser, on_delete=DO_NOTHING) 
 
 class Image(models.Model):
@@ -92,7 +107,7 @@ class Image(models.Model):
     imageID = models.AutoField(primary_key=True) 
     waiverID = models.ForeignKey(Waiver, on_delete=models.CASCADE, null=True) #Deleting an inspection deletes the photo, 
                                                                               #because we include and imageID in TIUser we can't force a waiver FK
-    image = models.ImageField(upload_to='images', null=True)
+    image = models.ImageField(upload_to='images/', null=True)
 
 
 

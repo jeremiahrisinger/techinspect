@@ -21,6 +21,9 @@
         <div class="div-lvl1">
           {% if garage_cars %}
           {% for car in garage_cars %}
+          {% if car.inspectionID and car.inspectionID.Verified == True  and today and car.inspectionID.inspectionDateEnd < today %}
+            <p> Shit worked! </p>
+           {% endif %}
           <div class="div-lvl2">
             
             <p class="div-head">{{car.name}}</p>
@@ -28,7 +31,8 @@
             {{ car.vehicleYear }}
             {{ car.vehicleMake }}
             {{ car.vehicleModel }}
-            {{ car.vehicleAvatar}}
+            {{ car.vehicleType }}
+            <img src="{{ car.vehicleAvatar.url }}"/>
             {% if car.inspectionID and car.inspectionID.Verified == True %}
             <p> {{ car.name }} is inspected and ready to race!</p>
             {% endif %}

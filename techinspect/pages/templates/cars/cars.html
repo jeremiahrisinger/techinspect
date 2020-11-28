@@ -21,7 +21,7 @@
         <div class="div-lvl1">
           <div class="div-lvl2">
             <p class="div-head"> + Add a car </p>
-            <form method="POST">
+            <form enctype="multipart/form-data" method="POST">
                 {% csrf_token %}
                 {% for field in vehicle_form %}
                   <p> {{field}} </p>
