@@ -15,7 +15,7 @@ def login_render(request):
             #IMPORTANT: TO ACCESS FORM DATA ALWAYS USE cleaned_data['name of field']
             try:
                 if utils.login(form.cleaned_data['username'], form.cleaned_data['password']):
-                    return HttpResponseRedirect('home/' + utils.find_user_uuid(form.cleaned_data['username']) + '/') 
+                    return HttpResponseRedirect('garage/' + utils.find_user_uuid(form.cleaned_data['username']) + '/') 
                 
                 else:
                     messages.error(request, "Login failed due to incorrect username/password")
@@ -26,8 +26,6 @@ def login_render(request):
     return render(request, 'login/index.html', {'form': form})
 
 
-def homepage_render(request, uuid):
-    return render(request, 'home/index.html', {'uuid': uuid})
 
 def profile_render(request, uuid):
     if request.method == 'POST':

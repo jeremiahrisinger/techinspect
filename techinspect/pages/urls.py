@@ -6,7 +6,6 @@ from pages import views
 
 urlpatterns = [
         path('', views.login_render, name='Login'),
-        path('home/<str:uuid>/', views.homepage_render, name="Homepage"),
         path('signup/', views.signup_render, name="Signup"),
         path('profile/<str:uuid>/', views.profile_render, name="Profile"),
         path('waivers/<str:uuid>/', views.waiver_render, name="Waivers"),
