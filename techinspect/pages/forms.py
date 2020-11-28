@@ -2,7 +2,7 @@ from django import forms
 from django.forms import ModelForm
 from pages.models import Image, TIUser, Waiver, Vehicle, Inspection
 from django.forms.widgets import TextInput, NumberInput
-from datetime import datetime
+import datetime
 from pages import utils
 
 class LoginForm(forms.Form):
@@ -17,7 +17,7 @@ class SignupForm(forms.Form):
     last_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Last name'}))
     password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Password'}))
     confirm_pass = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Verify Password'}))
-    #image = forms.ImageField(required=False)
+    image = forms.ImageField(required=False)
     def verify_password(self):
         if self.is_valid():
             passw = self.cleaned_data['password']
@@ -28,9 +28,7 @@ class SignupForm(forms.Form):
     def create_user(self):
         if self.verify_password() and self.is_valid():
             entry = TIUser.objects.create_user(username=self.cleaned_data['username'], email=self.cleaned_data['email'], password=self.cleaned_data['password'])
-            #user_image = Image(image=self.cleaned_data['image'])
-            #key = user_image.imageID
-            #entry.image = self.cleaned_data['image']
+            entry.image = self.cleaned_data['image']
             entry.first_name= self.cleaned_data['first_name']
             entry.last_name = self.cleaned_data['last_name']
             entry.save()
@@ -116,18 +114,24 @@ class InspectionForm(ModelForm):
 class VehicleForm(ModelForm):
     class Meta:
         model = Vehicle
-        fields = ['name','VIN', 'vehicleYear', 'vehicleMake', 'vehicleModel']
+        fields = ['name','VIN', 'vehicleYear', 'vehicleMake', 'vehicleModel', 'vehicleType', 'vehicleAvatar']
         widgets = {
                 'name': TextInput(attrs={'placeholder': 'Car nickname'}),
                 'VIN': TextInput(attrs={'placeholder': 'Car VIN'}),
-                'vehicleYear': NumberInput(attrs={'placeholder': 'Year made', 'min': 1920, 'max': datetime.now().year + 1}),
+                'vehicleYear': NumberInput(attrs={'placeholder': 'Year made', 'min': 1920, 'max': datetime.datetime.now().year + 1}),
                 'vehicleMake': TextInput(attrs={'placeholder': 'Vehicle Make'}),
                 'vehicleModel': TextInput(attrs={'placeholder': 'Vehicle Model'}),
                 }
+    def __init__(self, *args, **kwargs):
+        super(VehicleForm, self).__init__(*args, **kwargs)
+        self.fields['vehicleType'].initial = 'Vehicle Type'
+        self.fields['vehicleAvatar'].required = False
     def create(self, uuid):
         if self.is_valid():
-            entry = Vehicle(VIN=self.cleaned_data['VIN'], vehicleYear=self.cleaned_data['vehicleYear'], vehicleMake = self.cleaned_data['vehicleMake'], vehicleModel=self.cleaned_data['vehicleModel'])
+            print("We aren't getting here at all in VehicleForm/create")
+            entry = Vehicle(name=self.cleaned_data['name'], VIN=self.cleaned_data['VIN'], vehicleYear=self.cleaned_data['vehicleYear'], vehicleMake = self.cleaned_data['vehicleMake'], vehicleModel=self.cleaned_data['vehicleModel'], vehicleType = self.cleaned_data['vehicleType'])
             entry.UUID = utils.user_list[uuid].user
+            entry.vehicleAvatar = self.cleaned_data['vehicleAvatar']
             print(entry)
             entry.save()
     def read_only(self):
@@ -147,7 +151,6 @@ class ProfileForm(ModelForm):
         super(ProfileForm, self).__init__(*args, **kwargs)
         self.fields['username'].widget.attrs['readonly'] = True
         self.fields['email'].widget.attrs['readonly'] = True
-        self.fields['image'].widget.attrs['readonly'] = True
         self.fields['first_name'].widget.attrs['readonly'] = True
         self.fields['last_name'].widget.attrs['readonly'] = True
 

@@ -25,12 +25,14 @@
               Profile
             </p>
             <div class="div-lvl2">
-              
+              <p class="div-head">Your information</p>
               {% if profile_form %}
+              {% if profile_image %}<img src="{{ profile_image.url }}"/> {% endif %}
               {{profile_form.username}}
               {{profile_form.email}}
               {{profile_form.first_name}}
               {{profile_form.last_name}}
+
               {% endif %}
             </div>
             <div class="div-lvl2">

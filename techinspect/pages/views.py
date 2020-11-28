@@ -6,6 +6,7 @@ from django.utils.html import mark_safe
 from pages import forms
 from pages import utils
 from pages.models import Vehicle
+import datetime
 
 def login_render(request):
     if request.method == 'POST':
@@ -45,7 +46,8 @@ def profile_render(request, uuid):
         password_form = forms.PasswordChangeForm()
 
     form = forms.ProfileForm(instance=utils.get_user(uuid)) #Assumes user is logged in.
-    return render(request, 'profile/profile.html', {'profile_form': form, 'password_form': password_form, 'uuid': uuid})
+    profile_image = utils.get_user(uuid).image
+    return render(request, 'profile/profile.html', {'profile_image': profile_image, 'profile_form': form, 'password_form': password_form, 'uuid': uuid})
 
 def inspection_render(request, uuid):
     if request.method == 'POST':
@@ -63,11 +65,12 @@ def inspection_render(request, uuid):
 
 def garage_render(request, uuid):
     cars = Vehicle.objects.filter(UUID=utils.get_user(uuid))
-    return render(request, 'cars/garage.html', {'garage_cars': cars, 'uuid': uuid})
+    today = datetime.date.today()
+    return render(request, 'cars/garage.html', {'garage_cars': cars, 'uuid': uuid, 'today': today})
 
 def cars_render(request, uuid):
     if request.method == 'POST':
-        form = forms.VehicleForm(request.POST)
+        form = forms.VehicleForm(request.POST, request.FILES)
         print(uuid)
         if form.is_valid():
             form.create(uuid)
