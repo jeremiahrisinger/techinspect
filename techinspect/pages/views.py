@@ -124,4 +124,43 @@ def signup_render(request):
         form = forms.SignupForm()
     return render(request, 'signup/index.html', {'form': form})
 
-    
+def manage_ti_render(request, uuid):
+    #Here we just supply the shit and defer aciton to mange_ti_delete and manage_ti_add
+    add_form = forms.NameForm()
+    delete_form = forms.NameForm()
+    return render(request, 'ti/index.html', {'add_form': add_form, 'delete_form': delete_form, 'uuid': uuid})
+
+def manage_ti_delete(request, uuid):
+    if request.method == 'POST':
+        delete_form = forms.NameForm(request.POST)
+        if not delete_form.is_valid():
+            if not delete_form.delete():
+                messages.error(request, "Username doesn't exist or the write failed otherwise.")
+            else:
+                messages.success(request, "Tech Inspector DELETED")
+    add_form = forms.NameForm()
+    delete_form = forms.NameForm()
+    return render(request, 'ti/index.html', {'add_form': add_form, 'delete_form': delete_form, 'uuid': uuid})
+
+def manage_ti_add(request, uuid):
+    if request.method == 'POST':
+        add_form = forms.NameForm(request.POST)
+        if add_form.is_valid():
+            if not add_form.add():
+                messages.error(request, "Username doesn't exist or the write failed otherwise.")
+            else:
+                messages.success(request, "Tech Inspector ADDED")
+
+    add_form = forms.NameForm()
+    delete_form = forms.NameForm()
+    return render(request, 'ti/index.html', {'add_form': add_form, 'delete_form': delete_form, 'uuid': uuid})
+
+
+
+
+
+
+
+
+
+
