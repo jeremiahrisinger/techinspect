@@ -162,14 +162,21 @@ def review_get_cars(request, uuid):
             if len(cars) == 0:
                 messages.error(request, "Search failed for cars for this user.")
                 return render(request, 'ti/review.html', {'name_form': name_form, 'uuid': uuid})
+            else:
+                vehicle_choice_form = forms.VehicleChoiceForm(cars)
         else:
             messages.error(request, "Information sent was rejected by validation test.")
 
-    return render(request, 'ti/review.html', {'name_form': name_form, 'cars': cars, 'uuid': uuid})
+    return render(request, 'ti/review.html', {'name_form': name_form, 'vehicle_choice_form': vehicle_choice_form, 'uuid': uuid})
 
 
 
-
+def review_get_inspection(request, uuid):
+    if request.method == 'POST':
+        vehicle_choice = forms.VehicleChoiceForm(request.POST)
+        if vehicle_choice.is_valid():
+            #Get the inspection and return it.
+            pass
 
 
 

@@ -97,6 +97,14 @@ class WaiverForm(ModelForm):
         except Exception:
             print("Failed to find user")
 
+class VehicleChoiceForm(ModelForm):
+    class Meta:
+        model = Inspection
+        fields = ['UserVehicle']
+    def __init__(self, queryset, *args, **kwargs):
+        super(VehicleChoiceForm, self).__init__(*args, **kwargs)
+        self.fields['UserVehicle'].queryset = queryset
+
 
 class InspectionForm(ModelForm):
     class Meta:

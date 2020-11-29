@@ -28,27 +28,13 @@
                  <input type="submit" value="Get cars" class="button"> 
             </form>
             {% endif %}
-            {% if cars %}
-            {% for car in cars %} 
-            {{car.VIN}}
-            {{car.name}}
-            {% endfor %}
+
+            {% if vehicle_choice_form %}
+            <form action="/select_car/{{uuid}}/" method="POST">
+                {{vehicle_choice_form.UserVehicle}}
+                 <input type="submit" value="Choose Vehicle" class="button"> 
+            </form>
             {% endif %}
-              <--
-              {% if add_form %}
-              <form action="/add_ti/{{uuid}}/" method="POST">
-                  {% csrf_token %}
-                  {{ add_form.username }}
-                 <input type="submit" value="Add Tech Inspector" class="button"> 
-              </form>
-              {% endif %}
-              {% if delete_form %}
-              <form action="/delete_ti/{{uuid}}/" method="POST">
-                  {% csrf_token %}
-                  {{ delete_form.username }}
-                 <input type="submit" value="Delete Tech Inspector" class="button"> 
-              </form> -->
-              {% endif %}
         </div>                                    
     </body>
   </html>
