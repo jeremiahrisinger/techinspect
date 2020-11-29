@@ -16,24 +16,30 @@
           <li class="nav-bar-item"><a href="/profile/{{uuid}}/">Profile</a></li>
           <li class="nav-bar-item"><a href="/add_a_car/{{uuid}}/">Add Car</a></li>
           <li class="nav-bar-item"><a href="/garage/{{uuid}}/" class="active">Your Cars</a></li>
+          <li class="nav-bar-item"><a href="/ti/{{uuid}}/">T.I.</a></li>
         </ul>
         <div class="div-lvl1">
           {% if myZips %}
           {% for infoTuple in myZips %}
           <div class="div-lvl2">
-            
-          {% if infoTuple.0.inspectionID and infoTuple.0.inspectionID.Verified == True  and infoTuple.1 < 1 %}
-            <p> Valid inspection on file </p>
-          {% else %}
-            <p> Your inspection is either invalid or out of date. </p>
-           {% endif %}
             <p class="div-head">{{infoTuple.0.name}}</p>
-            {{ infoTuple.0.VIN }}
-            {{ infoTuple.0.vehicleYear }}
-            {{ infoTuple.0.vehicleMake }}
-            {{ infoTuple.0.vehicleModel }}
-            {{ infoTuple.0.vehicleType }}
-            {% if infoTuple.0.vehicleAvatar %}<img src="{{ infoTuple.0.vehicleAvatar.url }}"/> {% endif %}
+           
+            <p>VIN #:         {{ infoTuple.0.VIN }}</p>
+            <p>Year Made:     {{ infoTuple.0.vehicleYear }}</p>
+            <p>Vehicle Make:  {{ infoTuple.0.vehicleMake }}</p>
+            <p>Vehicle Model: {{ infoTuple.0.vehicleModel }}</p>
+            <p>Vehicle Type:  {{ infoTuple.0.vehicleType }}</p>
+            {% if infoTuple.0.inspectionID and infoTuple.0.inspectionID.Verified == True  and infoTuple.1 < 1 %}
+              <p> Valid inspection on file </p>
+            {% else %}
+              <p> Your inspection is either invalid or out of date. </p>
+            {% endif %}
+         
+            {% if infoTuple.0.vehicleAvatar %}
+              <img src="{{ infoTuple.0.vehicleAvatar.url }}" width="200" />
+            {% else %}
+              <img src="../../static/images/logo.png" width="100">
+            {% endif %}
           </div>
           {% endfor %} 
           {% endif %}
