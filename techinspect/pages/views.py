@@ -147,6 +147,24 @@ def manage_ti_add(request, uuid):
     delete_form = forms.NameForm()
     return render(request, 'ti/index.html', {'add_form': add_form, 'delete_form': delete_form, 'uuid': uuid})
 
+def review_render(request, uuid):
+    #We're going to use the same delegation strategy to handle this stuff.
+    #Since this page really only asks for a name, that's all we include to start.
+    name_form = forms.NameForm()
+    return render(request, 'ti/review.html', {'name_form': name_form, 'uuid': uuid})
+
+def review_get_cars(request, uuid):
+    if request.method == 'POST':
+        name_form = forms.NameForm(request.POST)
+        if name_form.is_valid():
+            cars = name_form.get_cars()
+            if len(cars) == 0:
+                messages.error(request, "Search failed for cars for this user.")
+                return render(request, 'ti/review.html', {'name_form': name_form, 'uuid': uuid})
+        else:
+            messages.error(request, "Information sent was rejected by validation test.")
+
+    return render(request, 'ti/review.html', {'name_form': name_form, 'cars': cars, 'uuid': uuid})
 
 
 
