@@ -30,6 +30,9 @@ def login_render(request):
 =======
 def homepage_render(request, uuid):
     return render(request, 'profile/profile.html', {'uuid': uuid})
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 
 def profile_render(request, uuid):
