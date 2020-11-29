@@ -22,7 +22,7 @@
           </div>
         </ul>
         
-
+          <div class="div-lvl1">
             <p class="div-head">Find Cars by Username</p>
             <div class="div-lvl2" id="centered">
               <ul class="messages">
@@ -30,7 +30,7 @@
                 <p {% if message.tags %} class="{{ message.tags  }}"{% endif %}>{{ message  }}</p>
                 {% endfor %}
               </ul>
-            </div>
+            
             
               {% if name_form %}
               <form action="/get_cars/{{uuid}}/" method="POST">
@@ -46,6 +46,7 @@
                   <input type="submit" value="Find inspection" class="button"> 
               </form>
               {% endif %}
+            </div>
             {% if inspection_form %}
             <form action="/submit_ti_insp/{{uuid}}/" method=POST>
             <p class="div-head">
