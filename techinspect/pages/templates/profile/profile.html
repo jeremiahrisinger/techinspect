@@ -25,7 +25,7 @@
               Profile
             </p>
             <div class="div-lvl2">
-              <p class="div-head">Your information</p>
+              <p class="div-head">Your Information</p>
               {% if profile_form %}
               <table>
                 <tr>
@@ -47,7 +47,7 @@
             <div class="div-lvl2">
               <p class="div-head">Your Waivers</p>
             {% if waiver_form %}
-              <p>Your waiver is vaild!</p>
+              <p id="centered">Your waiver is vaild!</p>
             {% else %} 
               <p>You do not have a valid waiver!</p>
             {% endif %}
@@ -61,7 +61,8 @@
                 {{ field }}
                 {% endfor %}
             {% endif %}
-            <input type="submit" value="change password" class="button" >
+            <br>
+            <input type="submit" value="Change Password" class="button-small" >
             </form>
             </div>
            </div>
