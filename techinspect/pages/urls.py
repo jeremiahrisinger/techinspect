@@ -15,6 +15,8 @@ urlpatterns = [
         path('manage_ti/<str:uuid>/', views.manage_ti_render, name="Add/Remove Tech Inspectors"),
         path('delete_ti/<str:uuid>/', views.manage_ti_delete),
         path('add_ti/<str:uuid>/', views.manage_ti_add),
+        path('review/<str:uuid>/', views.review_render),
+        path('get_cars/<str:uuid>/', views.review_get_cars),
         path('admin/', admin.site.urls),
 ]
 
