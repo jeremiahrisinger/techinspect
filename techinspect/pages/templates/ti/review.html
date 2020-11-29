@@ -13,28 +13,47 @@
           <li class="nav-bar-item"><a href="/profile/{{uuid}}/">Profile</a></li>
           <li class="nav-bar-item"><a href="/add_a_car/{{uuid}}/">Add Car</a></li>
           <li class="nav-bar-item"><a href="/garage/{{uuid}}/">Your Cars</a></li>
+          <div class="dropdown">
+            <button class="button-dropdown">T.I.</button>  
+            <div class="dropdown-content">
+              <a href="/manage_ti/{{uuid}}/">Manage</a>
+              <a href="/reviews/{{uuid}}/">Reviews</a>
+            </div>
+          </div>
         </ul>
-        <ul class="messages">
-            {% for message in messages %}                                                                                                                                             
-            <p {% if message.tags %} class="{{ message.tags  }}"{% endif %}>{{ message  }}</p>
-            {% endfor %}
-        </ul>
+        
 
           <div class="div-lvl1">
-            {% if name_form %}
-            <form action="/get_cars/{{uuid}}/" method="POST">
-                  {% csrf_token %}
-                {{ name_form.username }}
-                 <input type="submit" value="Get cars" class="button"> 
-            </form>
-            {% endif %}
+            <p class="div-head">Find Cars by Username</p>
+            <div class="div-lvl2" id="centered">
+              <ul class="messages">
+                {% for message in messages %}                                                                                                                                             
+                <p {% if message.tags %} class="{{ message.tags  }}"{% endif %}>{{ message  }}</p>
+                {% endfor %}
+              </ul>
+              {% if name_form %}
+              <form action="/get_cars/{{uuid}}/" method="POST">
+                    {% csrf_token %}
+                  {{ name_form.username }}
+                  <input type="submit" value="Search" class="button"> 
+              </form >
+            
+              {% endif %}
+            </div>
             {% if cars %}
-            {% for car in cars %} 
-            {{car.VIN}}
-            {{car.name}}
-            {% endfor %}
+            <div class="div-lvl2">
+              <p class="div-head">Results</p>
+              <table style="margin: 10px auto">
+                {% for car in cars %}
+                <tr> 
+                  <td style="padding: 5px;">{{car.name}}</td> 
+                  <td style="padding: 5px;"> VIN:{{car.VIN}}</td>
+                </tr>
+                {% endfor %}
+              </table>
+            </div>
             {% endif %}
-              <--
+              <!--
               {% if add_form %}
               <form action="/add_ti/{{uuid}}/" method="POST">
                   {% csrf_token %}
