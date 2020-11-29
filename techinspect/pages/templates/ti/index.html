@@ -18,25 +18,31 @@
         
 
           <div class="div-lvl1">
-            <p class="div-head">Adding and Removing Tech Inspectors</p>
+            <p class="div-head">Tech Inspectors</p>
             <ul class="messages">
               {% for message in messages %}                                                                                                                                             
               <p {% if message.tags %} class="{{ message.tags  }}"{% endif %}>{{ message  }}</p>
               {% endfor %}
             </ul>
               {% if add_form %}
-              <form action="/add_ti/{{uuid}}/" method="POST">
-                  {% csrf_token %}
-                  {{ add_form.username }}
-                 <input type="submit" value="Add Tech Inspector" class="button"> 
-              </form>
+                <div class="div-lvl2" id="centered">
+                  <p class="div-head">Adding Tech Inspector</p>
+                  <form action="/add_ti/{{uuid}}/" method="POST">
+                      {% csrf_token %}
+                      {{ add_form.username }}
+                    <input type="submit" value="Add" class="button-small"> 
+                  </form>
+                </div>
               {% endif %}
               {% if delete_form %}
-              <form action="/delete_ti/{{uuid}}/" method="POST">
-                  {% csrf_token %}
-                  {{ delete_form.username }}
-                 <input type="submit" value="Delete Tech Inspector" class="button"> 
-              </form>
+                <div class="div-lvl2" id="centered">
+                  <p class="div-head">Removing Tech Inspector</p>
+                  <form action="/delete_ti/{{uuid}}/" method="POST">
+                      {% csrf_token %}
+                      {{ delete_form.username }}
+                    <input type="submit" value="Delete" class="button-small"> 
+                  </form>
+                </div>
               {% endif %}
         </div>                                    
     </body>
