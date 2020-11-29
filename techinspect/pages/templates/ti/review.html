@@ -31,8 +31,53 @@
 
             {% if vehicle_choice_form %}
             <form action="/select_car/{{uuid}}/" method="POST">
+                  {% csrf_token %}
                 {{vehicle_choice_form.UserVehicle}}
                  <input type="submit" value="Choose Vehicle" class="button"> 
+            </form>
+            {% endif %}
+            
+            {% if inspection_form %}
+            <form action="/submit_ti_insp/{{uuid}}/" method=POST>
+            <p class="div-head">
+              Inspection
+            </p>
+            <p> {{ inspection_form.UserVehicle }} </p>
+            <div class="div-lvl2" id="checkboxes">
+              <p class="div-head"> Exterior </p>
+              <p class="inspect-item-text">{{ inspection_form.noWheelPlay }}        No play in the wheel bearings</p>
+              <p class="inspect-item-text">{{ inspection_form.goodWheels }}        Wheels are tight and have no visible cracks</p>
+              <p class="inspect-item-text">{{ inspection_form.goodHubCaps }}        Hubcaps or center caps removed or firmly secured</p>
+              <p class="inspect-item-text">{{ inspection_form.goodTires }}        Tires are in good condition</p>
+              <p class="inspect-item-text">{{ inspection_form.goodTireTreadDepth }}        Tire tread depth (as appropriate)</p>
+              <p class="inspect-item-text">{{ inspection_form.goodBreakPads }}        Brake pads/rotors in good condition</p>
+              <p class="inspect-item-text">{{ inspection_form.noLooseBodyPanels }}        No loose body panels</p>
+              <p class="inspect-item-text">{{ inspection_form.goodNumbers }}        Numbers on & clearly visible on body</p>
+              <p class="inspect-item-text">{{ inspection_form.optionalExteriorPhoto }}        Optional Exterior Photo</p>
+            </div>
+            <div class="div-lvl2" id="checkboxes">  
+              <p class="div-head"> Interior </p>
+              <p class="inspect-item-text">{{ inspection_form.goodFloorMats }} Floor mats and all other loose items removed from car</p>
+              <p class="inspect-item-text">{{ inspection_form.secureBTC }} Brake, throttle, and clutch (if applicable) pedals secure</p>
+              <p class="inspect-item-text">{{ inspection_form.goodBreakPedal }} No excessive play in the steering</p>
+              <p class="inspect-item-text">{{ inspection_form.noExcessPlayinSteering }} No excessive play in the gear selector</p>
+              <p class="inspect-item-text">{{ inspection_form.goodSeat }} Seat in functional order</p>
+              <p class="inspect-item-text">{{ inspection_form.goodSeatBelt }} Seat Belt proper for year of car and class</p>
+              <p class="inspect-item-text">{{ inspection_form.goodMountedCamera }} Camera, phones, and other gear mounted to car</p>
+              <p class="inspect-item-text">{{ inspection_form.optionalInteriorPhoto }}        Optional Interior Photo</p>
+            </div>  
+            <div class="div-lvl2" id="checkboxes">
+              <p class="div-head"> Under the Hood and Trunk </p>
+              <p class=inspect-item-text id="contains-notes">{{ inspection_form.goodBatteryandConnections }} Battery and connections secure {{ inspection_form.goodBatteryandConnectionsNotes }}</p>
+              <p class=inspect-item-text id="contains-notes">{{ inspection_form.goodAirIntakeandSecure }} Air intake or air box secure {{ inspection_form.goodAirIntakeandSecureNotes }} </p>
+              <p class=inspect-item-text id="contains-notes">{{ inspection_form.goodThrottleCable }} Throttle cable secure(if applicable) {{ inspection_form.goodThrottleCableNotes }} </p>
+              <p class=inspect-item-text id="contains-notes">{{ inspection_form.goodFluidCaps }} All fluid caps secure {{ inspection_form.goodFluidCapsNotes }}</p>
+              <p class=inspect-item-text id="contains-notes">{{ inspection_form.noMajorLeaks }}No major leaks apparent {{ inspection_form.noMajorLeaksNotes }}</p>
+              <p class=inspect-item-text id="contains-notes">{{ inspection_form.emptyTrunk }}Trunk is empty of movable items {{ inspection_form.emptyTrunkNotes }}</p>
+              <p class=inspect-item-text id="contains-notes">{{ inspection_form.functionalExhaust }}Function exhaust system {{ inspection_form.functionalExhaustNotes }}</p>
+              <p class="inspect-item-text">{{ inspection_form.optionalHUTPhoto }}        Optional Hood & Trunk Photo</p>
+            </div>
+            <input type="submit" value="Submit Inspection(TI)" class="button">
             </form>
             {% endif %}
         </div>                                    

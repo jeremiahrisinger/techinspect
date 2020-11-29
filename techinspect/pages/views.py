@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.utils.html import mark_safe
 from pages import forms
 from pages import utils
-from pages.models import Vehicle
+from pages.models import Vehicle, Inspection
 import datetime
 
 def login_render(request):
@@ -50,11 +50,13 @@ def profile_render(request, uuid):
 
 def inspection_render(request, uuid):
     if request.method == 'POST':
-        form = forms.InspectionForm(uuid, request.POST)
+        form = forms.InspectionForm(request.POST)
+        form.set_queryset(uuid)
         if form.is_valid():
             print("Getting here")
             form.create()
-            form = forms.InspectionForm(uuid)
+            form = forms.InspectionForm()
+            form.set_queryset(uuid)
         else:
             print("Form failed for some reason")
     else:
@@ -163,7 +165,8 @@ def review_get_cars(request, uuid):
                 messages.error(request, "Search failed for cars for this user.")
                 return render(request, 'ti/review.html', {'name_form': name_form, 'uuid': uuid})
             else:
-                vehicle_choice_form = forms.VehicleChoiceForm(cars)
+                vehicle_choice_form = forms.VehicleChoiceForm()
+                vehicle_choice_form.set_queryset(cars)
         else:
             messages.error(request, "Information sent was rejected by validation test.")
 
@@ -176,9 +179,24 @@ def review_get_inspection(request, uuid):
         vehicle_choice = forms.VehicleChoiceForm(request.POST)
         if vehicle_choice.is_valid():
             #Get the inspection and return it.
-            pass
+            print(type(vehicle_choice.cleaned_data['UserVehicle']))
+            insp = vehicle_choice.cleaned_data['UserVehicle'].inspectionID
+            insp_fm = forms.InspectionForm(instance=insp)
+            insp_fm.set_UserVehicle(vehicle_choice.cleaned_data['UserVehicle'])
+            insp_fm.set_inspectionID(insp.inspectionID)
+            #define name_form, repass vehicle_choice, repass uuid, create inspection form
+            name_form = forms.NameForm()
+            name_form.fields['username'] = vehicle_choice.cleaned_data['UserVehicle'].UUID.username
 
+            return render(request, 'ti/review.html', {'name_form': name_form, 'vehicle_choice_form': vehicle_choice, 'inspection_form': insp_fm, 'uuid': uuid})
+        else:
+            name_form = forms.NameForm()
+            messages.error(request, "Information sent was rejected by validation test.")
+            return render(request, 'ti/review.html', {'name_form': name_form, 'uuid': uuid})
+    else:
+        name_form = forms.NameForm()
 
+    return render(request, 'ti/review.html', {'name_form': name_form, 'uuid': uuid})
 
 
 
