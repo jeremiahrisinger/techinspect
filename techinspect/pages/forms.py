@@ -40,6 +40,13 @@ class NameForm(forms.Form):
             except Exception:
                 return False
         return False
+    def get_cars(self):
+        if self.is_valid():
+            try:
+                cars = Vehicle.objects.filter(UUID=TIUser.objects.get(username=self.cleaned_data['username']))
+                return cars
+            except Exception:
+                return []
 
 class SignupForm(forms.Form):
     username = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Username'}))
