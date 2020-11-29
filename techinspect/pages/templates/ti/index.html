@@ -8,20 +8,22 @@
     <body class="home-background">
       <h1 class="title">CHAMPAIGN COUNTY SPORTS CAR CLUB</h1>
         <ul class="nav-bar">
-          <li class="nav-bar-item"><a href="/inspections/{{uuid}}/" class="active">Inspections</a></li>
+          <li class="nav-bar-item"><a href="/inspections/{{uuid}}/" >Inspections</a></li>
           <li class="nav-bar-item"><a href="/waivers/{{uuid}}/">Waivers</a></li>
           <li class="nav-bar-item"><a href="/profile/{{uuid}}/">Profile</a></li>
           <li class="nav-bar-item"><a href="/add_a_car/{{uuid}}/">Add Car</a></li>
           <li class="nav-bar-item"><a href="/garage/{{uuid}}/">Your Cars</a></li>
-          <li class="nav-bar-item"><a href="/ti/{{uuid}}/">T.I.</a></li>
+          <li class="nav-bar-item"><a href="/manage_ti/{{uuid}}/" class="active">T.I.</a></li>
         </ul>
-        <ul class="messages">
-            {% for message in messages %}                                                                                                                                             
-            <p {% if message.tags %} class="{{ message.tags  }}"{% endif %}>{{ message  }}</p>
-            {% endfor %}
-        </ul>
+        
 
           <div class="div-lvl1">
+            <p class="div-head">Adding and Removing Tech Inspectors</p>
+            <ul class="messages">
+              {% for message in messages %}                                                                                                                                             
+              <p {% if message.tags %} class="{{ message.tags  }}"{% endif %}>{{ message  }}</p>
+              {% endfor %}
+            </ul>
               {% if add_form %}
               <form action="/add_ti/{{uuid}}/" method="POST">
                   {% csrf_token %}
