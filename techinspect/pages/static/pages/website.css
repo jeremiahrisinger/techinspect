@@ -367,13 +367,18 @@ input[type=text], input[type=number], #id_vehicleType, #id_vehicleAvatar{
 
     background-color: lightgray;
 }
-#profile-image{
-    margin: 10px;
-    max-width: 200px;
-    max-height: 200px;
+#div-profile-image{
+    margin: 20px;
+    height: 200px;
+    width: 200px;
     border: black 1px solid;
     border-radius: 200px;
-    object-fit: cover;
+    overflow: hidden;
+    
+    background-color: black;
+}
+#div-profile-image img{
+    background-color: #000;
 }
 
 #waiver {
