@@ -25,15 +25,8 @@ def login_render(request):
         form = forms.LoginForm()
     return render(request, 'login/index.html', {'form': form})
 
-
-<<<<<<< Updated upstream
-=======
 def homepage_render(request, uuid):
     return render(request, 'profile/profile.html', {'uuid': uuid})
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 
 def profile_render(request, uuid):
     if request.method == 'POST':

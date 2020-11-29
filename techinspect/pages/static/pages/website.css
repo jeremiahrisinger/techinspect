@@ -326,14 +326,20 @@ input[type=text]{
     display: flexbox;
     justify-content: space-evenly;
 }
+#centered{
+    text-align: center;
+}
+
 #id_waiverDate, #id_waiverName{
 
     background-color: lightgray;
 }
 #profile-image{
-    width: 100px;
-    max-height: 100px;
-    border-radius: 50px;
+    margin: 10px;
+    width: 200px;
+    max-height: 200px;
+    border: black 1px solid;
+    border-radius: 120px;
     object-fit: cover;
 }
 
