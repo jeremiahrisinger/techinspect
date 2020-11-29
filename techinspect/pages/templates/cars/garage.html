@@ -33,7 +33,7 @@
             {{ infoTuple.0.vehicleMake }}
             {{ infoTuple.0.vehicleModel }}
             {{ infoTuple.0.vehicleType }}
-            <img src="{{ infoTuple.0.vehicleAvatar.url }}"/>
+            {% if infoTuple.0.vehicleAvatar %}<img src="{{ infoTuple.0.vehicleAvatar.url }}"/> {% endif %}
           </div>
           {% endfor %} 
           {% endif %}
