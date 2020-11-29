@@ -21,6 +21,19 @@
         </ul>
 
           <div class="div-lvl1">
+            {% if name_form %}
+            <form action="/get_cars/{{uuid}}/" method="POST">
+                  {% csrf_token %}
+                {{ name_form.username }}
+                 <input type="submit" value="Get cars" class="button"> 
+            </form>
+            {% endif %}
+            {% if cars %}
+            {% for car in cars %} 
+            {{car.VIN}}
+            {{car.name}}
+            {% endfor %}
+            {% endif %}
               <--
               {% if add_form %}
               <form action="/add_ti/{{uuid}}/" method="POST">
