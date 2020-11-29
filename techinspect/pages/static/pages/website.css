@@ -69,6 +69,8 @@
 .div-head{
     padding-bottom:10px;
     border-bottom: 1px lightgray solid;
+    text-align: center;
+    font-weight: bold;
 }
 
 .div-lvl1{
@@ -99,7 +101,7 @@
     padding: 10px;
     width: 90%;
     height: fit-content;
-    text-align: center;
+    text-align: left;
 }
 
 .error{
@@ -328,6 +330,13 @@ input[type=text]{
 
     background-color: lightgray;
 }
+#profile-image{
+    width: 100px;
+    max-height: 100px;
+    border-radius: 50px;
+    object-fit: cover;
+}
+
 #waiver {
     max-width: 85%;
     text-align: left;
