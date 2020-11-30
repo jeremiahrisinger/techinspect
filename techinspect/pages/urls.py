@@ -19,6 +19,7 @@ urlpatterns = [
         path('get_cars/<str:uuid>/', views.review_get_cars),
         path('select_car/<str:uuid>/', views.review_get_inspection),
         path('submit_ti_insp/<str:uuid>/<str:VIN>/<int:insp_id>', views.review_set_inspection),
+        path('delete_car/<str:uuid>/<str:VIN>/', views.delete_car),
         path('admin/', admin.site.urls),
 ]
 

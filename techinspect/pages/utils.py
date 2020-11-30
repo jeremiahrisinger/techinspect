@@ -37,12 +37,18 @@ def login(email, pswd):
             #prune the list every time someone logs in.
             return True
     return False
+def is_TI(uuid):
+    try:
+        return TIUser.objects.get(UUID=uuid).isTI
+    except Exception:
+        return False
 
 def get_user(uuid):
     return TIUser.objects.get(UUID=uuid)
 
 def find_user_uuid(username):
     return TIUser.objects.get(username=username).UUID
+
 def test_user_list_prune():
     test = ActiveUser(TIUser.objects.get(username='jackmnitti@gmail.com'))
     test.login_time -= SIX_HOURS + 10

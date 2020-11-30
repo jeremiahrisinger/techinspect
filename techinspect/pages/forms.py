@@ -24,6 +24,7 @@ class NameForm(forms.Form):
                     print("Failed to save results after NameForm.delete()")
                     return False
             except Exception:
+                print("Failing in NameForm.delete")
                 return False
         return False
 
