@@ -150,6 +150,7 @@ class InspectionForm(ModelForm):
         self.fields['optionalExteriorPhoto'].required = False
         self.fields['optionalInteriorPhoto'].required = False
         self.fields['optionalHUTPhoto'].required = False
+        self.fields['inspectionID'].required = False
     def create(self):
         try:
             if self.is_valid():

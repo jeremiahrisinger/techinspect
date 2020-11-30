@@ -58,9 +58,11 @@ def inspection_render(request, uuid):
             form = forms.InspectionForm()
             form.set_queryset(uuid)
         else:
+            print(form.errors)
             print("Form failed for some reason")
     else:
-        form = forms.InspectionForm(uuid)
+        form = forms.InspectionForm()
+        form.set_queryset(uuid)
     return render(request, 'inspections/inspections.html', {'inspection_form': form, 'uuid': uuid})
 
 
