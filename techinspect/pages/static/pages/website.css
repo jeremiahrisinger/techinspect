@@ -374,7 +374,7 @@ input[type=checkbox]{
     background-color: red;
 }
 
-input[type=text], input[type=number], #id_vehicleType, #id_vehicleAvatar{
+input[type=text], input[type=number], #id_vehicleType, #id_vehicleAvatar, #id_UserVehicle{
     padding: 5px;
     height: 30px;
     width: 40%;
