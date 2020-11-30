@@ -164,6 +164,7 @@ class InspectionForm(ModelForm):
         self.fields['UserVehicle'].queryset = Vehicle.objects.filter(UUID=utils.get_user(uuid))
     def set_UserVehicle(self, vehicle):
         self.fields['UserVehicle'] = vehicle
+        self.fields['UserVehicle'].initial = vehicle
         self.fields['UserVehicle'].queryset = Vehicle.objects.filter(VIN=self.fields['UserVehicle'].VIN)
         print("Vehicle for insp_form is ")
         print(self.fields['UserVehicle'])

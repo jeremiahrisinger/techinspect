@@ -50,7 +50,7 @@ def profile_render(request, uuid):
 
 def inspection_render(request, uuid):
     if request.method == 'POST':
-        form = forms.InspectionForm(request.POST)
+        form = forms.InspectionForm(request.POST, request.FILES)
         form.set_queryset(uuid)
         if form.is_valid():
             print("Getting here")
@@ -187,8 +187,9 @@ def review_get_inspection(request, uuid):
             #define name_form, repass vehicle_choice, repass uuid, create inspection form
             name_form = forms.NameForm()
             name_form.fields['username'] = vehicle_choice.cleaned_data['UserVehicle'].UUID.username
-
-            return render(request, 'ti/review.html', {'name_form': name_form, 'vehicle_choice_form': vehicle_choice, 'inspection_form': insp_fm, 'uuid': uuid})
+            VIN = vehicle_choice.cleaned_data['UserVehicle'].VIN
+            insp_id = insp.inspectionID
+            return render(request, 'ti/review.html', {'name_form': name_form, 'vehicle_choice_form': vehicle_choice, 'inspection_form': insp_fm, 'uuid': uuid, 'VIN': VIN, 'insp_id': insp_id})
         else:
             name_form = forms.NameForm()
             messages.error(request, "Information sent was rejected by validation test.")
@@ -199,4 +200,13 @@ def review_get_inspection(request, uuid):
     return render(request, 'ti/review.html', {'name_form': name_form, 'uuid': uuid})
 
 
-
+def review_set_inspection(request, uuid, VIN, insp_id):
+    if request.method == 'POST':
+        insp_fm = forms.InspectionForm(request.POST, request.FILES)
+        insp = Inspection.objects.get(inspectionID = insp_id)
+        insp.Verified = True
+        insp.save()
+        return HttpResponseRedirect('/reviews/' + uuid + '/') 
+    else:
+        return HttpResponseRedirect('/reviews/' + uuid + '/') 
+    return HttpResponseRedirect('/reviews/' + uuid + '/') 
