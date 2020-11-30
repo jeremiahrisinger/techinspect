@@ -28,7 +28,8 @@ SECRET_KEY = '%ls=!$eyk5v*=w^^i-svdp_xbf+jc)18=5yxxje+5mts+b0isu'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["cartechinspect.herokuapp.com"]
+
 
 
 # Application definition
