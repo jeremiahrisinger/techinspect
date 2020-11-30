@@ -48,11 +48,12 @@
               {% endif %}
             </div>
             {% if inspection_form %}
-            <form action="/submit_ti_insp/{{uuid}}/" method=POST>
+            <form action="/submit_ti_insp/{{uuid}}/{{ VIN }}/{{ insp_id }}" enctype="multipart/form-data" method=POST>
             <p class="div-head">
               Inspection
             </p>
             <p> {{ inspection_form.UserVehicle }} </p>
+                    {% csrf_token %}
             <div class="div-lvl2" id="checkboxes">
               <p class="div-head"> Exterior </p>
               <p class="inspect-item-text">{{ inspection_form.noWheelPlay }}        No play in the wheel bearings</p>
@@ -86,6 +87,8 @@
               <p class=inspect-item-text id="contains-notes">{{ inspection_form.emptyTrunk }}Trunk is empty of movable items {{ inspection_form.emptyTrunkNotes }}</p>
               <p class=inspect-item-text id="contains-notes">{{ inspection_form.functionalExhaust }}Function exhaust system {{ inspection_form.functionalExhaustNotes }}</p>
               <p class="inspect-item-text">{{ inspection_form.optionalHUTPhoto }}        Optional Hood & Trunk Photo</p>
+              {{ inspection_form.inspectionID }}
+              {{ inspection_form.UserVehicle }}
             </div>
             <input type="submit" value="Submit Inspection(TI)" class="button">
             </form>

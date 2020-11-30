@@ -22,11 +22,11 @@
           </div>
         </ul>
           <div class="div-lvl1">
-              <form method="POST">
+              <form method="POST" enctype="multipart/form-data">
                   {% csrf_token %}
             {% if inspection_form %}
             <p class="div-head">
-              {{ inspection_form.inspectionID }} Inspection
+              Inspection
             </p>
             <p> {{ inspection_form.UserVehicle }} </p>
             <div class="div-lvl2" id="checkboxes">

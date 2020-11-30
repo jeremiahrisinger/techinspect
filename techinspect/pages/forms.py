@@ -150,6 +150,7 @@ class InspectionForm(ModelForm):
         self.fields['optionalExteriorPhoto'].required = False
         self.fields['optionalInteriorPhoto'].required = False
         self.fields['optionalHUTPhoto'].required = False
+        self.fields['inspectionID'].required = False
     def create(self):
         try:
             if self.is_valid():
@@ -164,6 +165,7 @@ class InspectionForm(ModelForm):
         self.fields['UserVehicle'].queryset = Vehicle.objects.filter(UUID=utils.get_user(uuid))
     def set_UserVehicle(self, vehicle):
         self.fields['UserVehicle'] = vehicle
+        self.fields['UserVehicle'].initial = vehicle
         self.fields['UserVehicle'].queryset = Vehicle.objects.filter(VIN=self.fields['UserVehicle'].VIN)
         print("Vehicle for insp_form is ")
         print(self.fields['UserVehicle'])
