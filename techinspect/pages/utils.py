@@ -39,12 +39,10 @@ def login(email, pswd):
     return False
 
 def get_user(uuid):
-    return user_list[uuid].user
+    return TIUser.objects.get(UUID=uuid)
 
 def find_user_uuid(username):
-    for key in list(user_list):
-        if user_list[key].user.username == username:
-            return key
+    return TIUser.objects.get(username=username).UUID
 def test_user_list_prune():
     test = ActiveUser(TIUser.objects.get(username='jackmnitti@gmail.com'))
     test.login_time -= SIX_HOURS + 10

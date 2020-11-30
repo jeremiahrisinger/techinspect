@@ -10,6 +10,7 @@ from django.db.models import *
 
 class TIUser(AbstractUser): 
     VIN = models.ForeignKey('Vehicle', on_delete=models.CASCADE, null=True) #Have to link by name of class since it is created later on in file
+    UUID = models.CharField(max_length=40, default="")
     waiverID = models.ForeignKey('Waiver', on_delete=models.CASCADE, null=True) #same here
     image = models.ImageField(upload_to='images/', null=True)
     isTI = models.BooleanField(default=False)

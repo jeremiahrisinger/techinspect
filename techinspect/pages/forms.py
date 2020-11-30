@@ -4,6 +4,7 @@ from pages.models import Image, TIUser, Waiver, Vehicle, Inspection
 from django.forms.widgets import TextInput, NumberInput
 import datetime
 from pages import utils
+import uuid
 
 class LoginForm(forms.Form):
     #max_length matches max_length for username field in pages/models.TIUser
@@ -69,6 +70,7 @@ class SignupForm(forms.Form):
             entry.image = self.cleaned_data['image']
             entry.first_name= self.cleaned_data['first_name']
             entry.last_name = self.cleaned_data['last_name']
+            entry.UUID = uuid.uuid4().hex
             entry.save()
             return True and TIUser.objects.get(username=entry.username)
         return False
@@ -162,7 +164,7 @@ class InspectionForm(ModelForm):
             print("Something didn't work in InspectionForm.create(); bad save?")
         return None
     def set_queryset(self, uuid):
-        self.fields['UserVehicle'].queryset = Vehicle.objects.filter(UUID=utils.get_user(uuid))
+        self.fields['UserVehicle'].queryset = Vehicle.objects.filter(UUID=TIUser.objects.get(UUID=uuid))
     def set_UserVehicle(self, vehicle):
         self.fields['UserVehicle'] = vehicle
         self.fields['UserVehicle'].initial = vehicle
@@ -193,7 +195,7 @@ class VehicleForm(ModelForm):
         if self.is_valid():
             print("We aren't getting here at all in VehicleForm/create")
             entry = Vehicle(name=self.cleaned_data['name'], VIN=self.cleaned_data['VIN'], vehicleYear=self.cleaned_data['vehicleYear'], vehicleMake = self.cleaned_data['vehicleMake'], vehicleModel=self.cleaned_data['vehicleModel'], vehicleType = self.cleaned_data['vehicleType'])
-            entry.UUID = utils.user_list[uuid].user
+            entry.UUID = TIUser.objects.get(UUID=uuid)
             entry.vehicleAvatar = self.cleaned_data['vehicleAvatar']
             print(entry)
             entry.save()
