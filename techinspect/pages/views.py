@@ -37,16 +37,19 @@ def profile_render(request, uuid):
                 user.set_password(password_form.cleaned_data['password'])
                 user.save()
                 print(user)
+                messages.success(request, "Password changed!")
             except Exception:
-                print("Something went wrong :(")
+                messages.error(request, "Your password change failed to be written.")
         else:
-            print("Checks failing for some reason")
+            messages.error(request, "Your information couldn't be verified: Try again.")
     else:
         password_form = forms.PasswordChangeForm()
-
-    form = forms.ProfileForm(instance=utils.get_user(uuid)) #Assumes user is logged in.
+    user = utils.get_user(uuid)
+    form = forms.ProfileForm(instance=user) #Assumes user is logged in.
     profile_image = utils.get_user(uuid).image
-    return render(request, 'profile/profile.html', {'profile_image': profile_image, 'profile_form': form, 'password_form': password_form, 'uuid': uuid})
+    today = datetime.date.today()
+    valid_waiver = user.waiverID and (today.year - user.waiverID.waiverDate.year) < 1
+    return render(request, 'profile/profile.html', {'profile_image': profile_image, 'profile_form': form, 'password_form': password_form, 'uuid': uuid, 'valid_waiver': valid_waiver})
 
 def inspection_render(request, uuid):
     if request.method == 'POST':
@@ -94,9 +97,13 @@ def waiver_render(request, uuid):
         form = forms.WaiverForm(request.POST)
         if form.is_valid():
                 #Add the waiver into the database for the given person
-            form.create(uuid)
-    else:
-        form = forms.WaiverForm()
+            if form.verify_name(uuid, form.cleaned_data['waiverName']):
+                form.create(uuid)
+                messages.success(request, "Waiver signed and submitted")
+            else:
+                messages.error(request, "Name provided didn't match our expected name on file")
+    
+    form = forms.WaiverForm()
     return render(request, 'waivers/waivers.html', {'waiver_form': form, 'uuid': uuid})
 
 

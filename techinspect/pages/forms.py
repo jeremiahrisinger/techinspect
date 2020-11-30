@@ -85,14 +85,39 @@ class WaiverForm(ModelForm):
     class Meta:
         model = Waiver
         fields = ['waiverDate', 'waiverName']
-    #TODO maybe utilize first/last name in account creation so we can compare against the user input?
+    
+    def verify_name(self, uuid, fullName):
+        try:
+            user = utils.get_user(uuid)
+            user_full_name = user.first_name + " " + user.last_name
+            print("username_full_name: " + user_full_name)
+            print("fullName" + fullName)
+            if user_full_name == fullName:
+                return True
+            return False
+        except Exception:
+            return False
     def create(self, uuid):
         try:
             user = utils.get_user(uuid)
             if self.is_valid():
+                print("Getting to WaiverForm.is_valid")
                 waiver = Waiver(waiverDate=self.cleaned_data['waiverDate'], waiverName=self.cleaned_data['waiverName'])
                 waiver.UUID = user
                 waiver.save()
+                #this mysteriously fails for some reason.
+                if user.waiverID:
+                    old_waiver_pk = user.waiverID.waiverID
+                    user.waiverID = None
+                    user.save()
+                    user.waiverID = waiver
+                    user.save()
+                    deleted = Waiver.objects.get(pk=old_waiver_pk).delete()
+                    print("Deleted fields:")
+                    print(deleted)
+                else:
+                    user.waiverID = waiver
+                    user.save()
             else:
                 #LOGGING?
                 print("Creating the form failed")

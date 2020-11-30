@@ -9,9 +9,9 @@ from django.db.models import *
 
 
 class TIUser(AbstractUser): 
-    VIN = models.ForeignKey('Vehicle', on_delete=models.CASCADE, null=True) #Have to link by name of class since it is created later on in file
+    VIN = models.ForeignKey('Vehicle', on_delete=models.DO_NOTHING, null=True) #Have to link by name of class since it is created later on in file
     UUID = models.CharField(max_length=40, default="")
-    waiverID = models.ForeignKey('Waiver', on_delete=models.CASCADE, null=True) #same here
+    waiverID = models.ForeignKey('Waiver', on_delete=models.DO_NOTHING, null=True) #same here
     image = models.ImageField(upload_to='images/', null=True)
     isTI = models.BooleanField(default=False)
     def __str__(self):
@@ -40,7 +40,7 @@ class Vehicle(models.Model):
     name = models.CharField(max_length=25, null=True)
     inspectionID = models.ForeignKey('Inspection', on_delete=models.CASCADE, null=True) #deleting a car deletes its inspection 
     vehicleAvatar = models.ImageField(upload_to='images/', null=True)
-    UUID = models.ForeignKey(TIUser, on_delete=models.DO_NOTHING) #Is this correct?
+    UUID = models.ForeignKey(TIUser, on_delete=models.CASCADE) #Is this correct?
     def __str__(self):
         if not self.name:
             return f"{self.vehicleYear} {self.vehicleMake} {self.vehicleModel}"
@@ -51,7 +51,7 @@ class Vehicle(models.Model):
 class Inspection(models.Model): 
     #TODO: Is defining an ID here necessary or should we just use the one provided by Django?
 
-    UserVehicle = models.ForeignKey(Vehicle, on_delete=DO_NOTHING) #Shouldn't delete a car when the inspection is deleted
+    UserVehicle = models.ForeignKey(Vehicle, on_delete=models.CASCADE) #Shouldn't delete a car when the inspection is deleted
 
     inspectionID = models.AutoField(primary_key=True) 
     inspectionDate = models.DateField(default=date.today) 
@@ -105,7 +105,6 @@ class Waiver(models.Model):
     waiverID = models.AutoField(primary_key=True) 
     waiverDate = models.DateField(default=date.today) 
     waiverName = models.CharField(default="Full name", max_length=100) 
-    UUID = models.ForeignKey(TIUser, on_delete=DO_NOTHING) 
 
 class Image(models.Model):
     #TODO: Is defining an ID here necessary or should we just use the one provided by Django?
