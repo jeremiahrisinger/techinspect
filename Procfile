@@ -1,2 +1,2 @@
 heroku ps:scale web=1
-web: gunicorn --log-file=- -chdir techinspect/ techinspect.wsgi
+web: gunicorn --chdir techinspect/ techinspect.wsgi
