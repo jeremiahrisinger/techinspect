@@ -4,6 +4,7 @@ from pages.models import Image, TIUser, Waiver, Vehicle, Inspection
 from django.forms.widgets import TextInput, NumberInput
 import datetime
 from pages import utils
+import uuid
 
 class LoginForm(forms.Form):
     #max_length matches max_length for username field in pages/models.TIUser
@@ -23,6 +24,7 @@ class NameForm(forms.Form):
                     print("Failed to save results after NameForm.delete()")
                     return False
             except Exception:
+                print("Failing in NameForm.delete")
                 return False
         return False
 
@@ -69,6 +71,7 @@ class SignupForm(forms.Form):
             entry.image = self.cleaned_data['image']
             entry.first_name= self.cleaned_data['first_name']
             entry.last_name = self.cleaned_data['last_name']
+            entry.UUID = uuid.uuid4().hex
             entry.save()
             return True and TIUser.objects.get(username=entry.username)
         return False
@@ -83,14 +86,39 @@ class WaiverForm(ModelForm):
     class Meta:
         model = Waiver
         fields = ['waiverDate', 'waiverName']
-    #TODO maybe utilize first/last name in account creation so we can compare against the user input?
+    
+    def verify_name(self, uuid, fullName):
+        try:
+            user = utils.get_user(uuid)
+            user_full_name = user.first_name + " " + user.last_name
+            print("username_full_name: " + user_full_name)
+            print("fullName" + fullName)
+            if user_full_name == fullName:
+                return True
+            return False
+        except Exception:
+            return False
     def create(self, uuid):
         try:
             user = utils.get_user(uuid)
             if self.is_valid():
+                print("Getting to WaiverForm.is_valid")
                 waiver = Waiver(waiverDate=self.cleaned_data['waiverDate'], waiverName=self.cleaned_data['waiverName'])
                 waiver.UUID = user
                 waiver.save()
+                #this mysteriously fails for some reason.
+                if user.waiverID:
+                    old_waiver_pk = user.waiverID.waiverID
+                    user.waiverID = None
+                    user.save()
+                    user.waiverID = waiver
+                    user.save()
+                    deleted = Waiver.objects.get(pk=old_waiver_pk).delete()
+                    print("Deleted fields:")
+                    print(deleted)
+                else:
+                    user.waiverID = waiver
+                    user.save()
             else:
                 #LOGGING?
                 print("Creating the form failed")
@@ -162,7 +190,7 @@ class InspectionForm(ModelForm):
             print("Something didn't work in InspectionForm.create(); bad save?")
         return None
     def set_queryset(self, uuid):
-        self.fields['UserVehicle'].queryset = Vehicle.objects.filter(UUID=utils.get_user(uuid))
+        self.fields['UserVehicle'].queryset = Vehicle.objects.filter(UUID=TIUser.objects.get(UUID=uuid))
     def set_UserVehicle(self, vehicle):
         self.fields['UserVehicle'] = vehicle
         self.fields['UserVehicle'].initial = vehicle
@@ -193,7 +221,7 @@ class VehicleForm(ModelForm):
         if self.is_valid():
             print("We aren't getting here at all in VehicleForm/create")
             entry = Vehicle(name=self.cleaned_data['name'], VIN=self.cleaned_data['VIN'], vehicleYear=self.cleaned_data['vehicleYear'], vehicleMake = self.cleaned_data['vehicleMake'], vehicleModel=self.cleaned_data['vehicleModel'], vehicleType = self.cleaned_data['vehicleType'])
-            entry.UUID = utils.user_list[uuid].user
+            entry.UUID = TIUser.objects.get(UUID=uuid)
             entry.vehicleAvatar = self.cleaned_data['vehicleAvatar']
             print(entry)
             entry.save()

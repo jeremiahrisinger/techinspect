@@ -7,7 +7,6 @@
     </head>
     <body class="home-background">
       <h1 class="title">CHAMPAIGN COUNTY SPORTS CAR CLUB</h1>
-        <!--img src = "{% static 'Banner.png'  %}" id = "banner"></img>
         <!-- Top navigation -->
         <ul class="nav-bar">
           <!-- Centered link -->
@@ -16,6 +15,7 @@
           <li class="nav-bar-item"><a href="/profile/{{uuid}}/">Profile</a></li>
           <li class="nav-bar-item"><a href="/add_a_car/{{uuid}}/">Add Car</a></li>
           <li class="nav-bar-item"><a href="/garage/{{uuid}}/" class="active">Your Cars</a></li>
+          {% if is_TI %}
           <div class="dropdown">
             <button class="button-dropdown">T.I.</button>  
             <div class="dropdown-content">
@@ -23,6 +23,7 @@
               <a href="/reviews/{{uuid}}/">Reviews</a>
             </div>
           </div>
+          {% endif %}
         </ul>
         <div class="div-lvl1">
           <p class="div-head">My Garage</p>
@@ -52,6 +53,10 @@
                 {% else %}
                   <p> Your inspection is either invalid or out of date. </p>
                 {% endif %}
+                <form action="/delete_car/{{ uuid }}/{{ infoTuple.0.VIN }}/" method='POST'>
+                    {% csrf_token %}
+                <p> <input type="submit" value="Delete this car" class="button-small"> </p>
+                </form>
               </td>
             </tr>
             </table>

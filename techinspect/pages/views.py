@@ -29,6 +29,7 @@ def homepage_render(request, uuid):
     return render(request, 'profile/profile.html', {'uuid': uuid})
 
 def profile_render(request, uuid):
+    is_TI = utils.is_TI(uuid)
     if request.method == 'POST':
         password_form = forms.PasswordChangeForm(request.POST)
         if password_form.is_valid() and password_form.verify_old_password(uuid) and password_form.verify_new_password():
@@ -37,18 +38,22 @@ def profile_render(request, uuid):
                 user.set_password(password_form.cleaned_data['password'])
                 user.save()
                 print(user)
+                messages.success(request, "Password changed!")
             except Exception:
-                print("Something went wrong :(")
+                messages.error(request, "Your password change failed to be written.")
         else:
-            print("Checks failing for some reason")
+            messages.error(request, "Your information couldn't be verified: Try again.")
     else:
         password_form = forms.PasswordChangeForm()
-
-    form = forms.ProfileForm(instance=utils.get_user(uuid)) #Assumes user is logged in.
+    user = utils.get_user(uuid)
+    form = forms.ProfileForm(instance=user) #Assumes user is logged in.
     profile_image = utils.get_user(uuid).image
-    return render(request, 'profile/profile.html', {'profile_image': profile_image, 'profile_form': form, 'password_form': password_form, 'uuid': uuid})
+    today = datetime.date.today()
+    valid_waiver = user.waiverID and (today.year - user.waiverID.waiverDate.year) < 1
+    return render(request, 'profile/profile.html', {'profile_image': profile_image, 'profile_form': form, 'password_form': password_form, 'uuid': uuid, 'valid_waiver': valid_waiver, 'is_TI': is_TI})
 
 def inspection_render(request, uuid):
+    is_TI = utils.is_TI(uuid)
     if request.method == 'POST':
         form = forms.InspectionForm(request.POST, request.FILES)
         form.set_queryset(uuid)
@@ -63,10 +68,11 @@ def inspection_render(request, uuid):
     else:
         form = forms.InspectionForm()
         form.set_queryset(uuid)
-    return render(request, 'inspections/inspections.html', {'inspection_form': form, 'uuid': uuid})
+    return render(request, 'inspections/inspections.html', {'inspection_form': form, 'uuid': uuid, 'is_TI': is_TI})
 
 
 def garage_render(request, uuid):
+    is_TI = utils.is_TI(uuid)
     cars = Vehicle.objects.filter(UUID=utils.get_user(uuid))
     today = datetime.date.today()
     yearDiffs = []
@@ -77,27 +83,32 @@ def garage_render(request, uuid):
             yearDiffs.append(5) #Basically just needs to be a number that fails the check
        
     myZips = zip(cars, yearDiffs)
-    return render(request, 'cars/garage.html', {'garage_cars': cars, 'myZips': myZips, 'uuid': uuid})
+    return render(request, 'cars/garage.html', {'garage_cars': cars, 'myZips': myZips, 'uuid': uuid, 'is_TI': is_TI})
 
 def cars_render(request, uuid):
+    is_TI = utils.is_TI(uuid)
     if request.method == 'POST':
         form = forms.VehicleForm(request.POST, request.FILES)
         print(uuid)
         if form.is_valid():
             form.create(uuid)
-    else:
-        form = forms.VehicleForm()
-    return render(request, 'cars/cars.html', {'vehicle_form': form, 'uuid': uuid})
+    form = forms.VehicleForm()
+    return render(request, 'cars/cars.html', {'vehicle_form': form, 'uuid': uuid, 'is_TI': is_TI})
 
 def waiver_render(request, uuid):
+    is_TI = utils.is_TI(uuid)
     if request.method == 'POST':
         form = forms.WaiverForm(request.POST)
         if form.is_valid():
                 #Add the waiver into the database for the given person
-            form.create(uuid)
-    else:
-        form = forms.WaiverForm()
-    return render(request, 'waivers/waivers.html', {'waiver_form': form, 'uuid': uuid})
+            if form.verify_name(uuid, form.cleaned_data['waiverName']):
+                form.create(uuid)
+                messages.success(request, "Waiver signed and submitted")
+            else:
+                messages.error(request, "Name provided didn't match our expected name on file")
+    
+    form = forms.WaiverForm()
+    return render(request, 'waivers/waivers.html', {'waiver_form': form, 'uuid': uuid, 'is_TI': is_TI})
 
 
 def signup_render(request):
@@ -122,10 +133,14 @@ def signup_render(request):
     return render(request, 'signup/index.html', {'form': form})
 
 def manage_ti_render(request, uuid):
+    is_TI = utils.is_TI(uuid)
     #Here we just supply the shit and defer aciton to mange_ti_delete and manage_ti_add
     add_form = forms.NameForm()
     delete_form = forms.NameForm()
-    return render(request, 'ti/index.html', {'add_form': add_form, 'delete_form': delete_form, 'uuid': uuid})
+    if is_TI:
+        return render(request, 'ti/index.html', {'add_form': add_form, 'delete_form': delete_form, 'uuid': uuid})
+    else:
+        return Http404()
 
 def manage_ti_delete(request, uuid):
     if request.method == 'POST':
@@ -171,7 +186,6 @@ def review_get_cars(request, uuid):
                 vehicle_choice_form.set_queryset(cars)
         else:
             messages.error(request, "Information sent was rejected by validation test.")
-
     return render(request, 'ti/review.html', {'name_form': name_form, 'vehicle_choice_form': vehicle_choice_form, 'uuid': uuid})
 
 
@@ -183,23 +197,20 @@ def review_get_inspection(request, uuid):
             #Get the inspection and return it.
             print(type(vehicle_choice.cleaned_data['UserVehicle']))
             insp = vehicle_choice.cleaned_data['UserVehicle'].inspectionID
-            insp_fm = forms.InspectionForm(instance=insp)
-            insp_fm.set_UserVehicle(vehicle_choice.cleaned_data['UserVehicle'])
-            insp_fm.set_inspectionID(insp.inspectionID)
+            if(insp and insp.inspectionID):
+                insp_fm = forms.InspectionForm(instance=insp)
+                insp_fm.set_UserVehicle(vehicle_choice.cleaned_data['UserVehicle'])
+                insp_fm.set_inspectionID(insp.inspectionID)
             #define name_form, repass vehicle_choice, repass uuid, create inspection form
-            name_form = forms.NameForm()
-            name_form.fields['username'] = vehicle_choice.cleaned_data['UserVehicle'].UUID.username
-            VIN = vehicle_choice.cleaned_data['UserVehicle'].VIN
-            insp_id = insp.inspectionID
-            return render(request, 'ti/review.html', {'name_form': name_form, 'vehicle_choice_form': vehicle_choice, 'inspection_form': insp_fm, 'uuid': uuid, 'VIN': VIN, 'insp_id': insp_id})
+                name_form = forms.NameForm()
+                name_form.fields['username'] = vehicle_choice.cleaned_data['UserVehicle'].UUID.username
+                VIN = vehicle_choice.cleaned_data['UserVehicle'].VIN
+                insp_id = insp.inspectionID
+                return render(request, 'ti/review.html', {'name_form': name_form, 'vehicle_choice_form': vehicle_choice, 'inspection_form': insp_fm, 'uuid': uuid, 'VIN': VIN, 'insp_id': insp_id})
         else:
-            name_form = forms.NameForm()
-            messages.error(request, "Information sent was rejected by validation test.")
-            return render(request, 'ti/review.html', {'name_form': name_form, 'uuid': uuid})
-    else:
-        name_form = forms.NameForm()
-
-    return render(request, 'ti/review.html', {'name_form': name_form, 'uuid': uuid})
+            return HttpResponseRedirect("/reviews/" + uuid + "/")
+    
+    return HttpResponseRedirect("/reviews/" + uuid + "/")
 
 
 def review_set_inspection(request, uuid, VIN, insp_id):
@@ -212,3 +223,14 @@ def review_set_inspection(request, uuid, VIN, insp_id):
     else:
         return HttpResponseRedirect('/reviews/' + uuid + '/') 
     return HttpResponseRedirect('/reviews/' + uuid + '/') 
+def delete_car(request, uuid, VIN):
+    if request.method == 'POST':
+        try:
+            vehicle = Vehicle.objects.get(VIN=VIN)
+            vehicle.inspectionID = None
+            vehicle.save()
+            vehicle.delete()
+        except Exception:
+            messages.error(request, "Database panicked during delete.")
+    return HttpResponseRedirect('/garage/' + uuid + '/') 
+

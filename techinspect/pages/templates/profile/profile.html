@@ -17,6 +17,7 @@
           <li class="nav-bar-item"><a href="/profile/{{uuid}}/" class="active">Profile</a></li>
           <li class="nav-bar-item"><a href="/add_a_car/{{uuid}}/">Add Car</a></li>
           <li class="nav-bar-item"><a href="/garage/{{uuid}}/">Your Cars</a></li>
+          {% if is_TI %}
           <div class="dropdown">
             <button class="button-dropdown">T.I.</button>  
             <div class="dropdown-content">
@@ -24,12 +25,20 @@
               <a href="/reviews/{{uuid}}/">Reviews</a>
             </div>
           </div>
+          {% endif %}
         </ul>
 
           <div class="div-lvl1">
             <p class="div-head">
               Profile
             </p>
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+                {% endfor %}
+            </ul>
+            {% endif %}
             <div class="div-lvl2">
               <p class="div-head">Your Information</p>
               {% if profile_form %}
@@ -52,10 +61,10 @@
             </div>
             <div class="div-lvl2" id="centered">
               <p class="div-head">Your Waivers</p>
-            {% if waiver_form %}
+            {% if valid_waiver %}
               <p id="centered">Your waiver is vaild!</p>
             {% else %} 
-              <p>You do not have a valid waiver!</p>
+              <p id="centered">You do not have a valid waiver!</p>
             {% endif %}
             </div>
             <div class="div-lvl2" id="centered">
